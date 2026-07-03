@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amit Aminov — Machine learning for formal reasoning</title>
+  <meta name="description" content="Amit Aminov: physicist by training, operations researcher by profession, ML researcher by obsession. Machine learning for formal reasoning — fine-tuning LLMs to prove theorems in Lean.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <h1>Amit Aminov</h1>
+    <p class="tagline">Machine learning for formal reasoning.</p>
+    <p class="subline">Physicist by training, operations researcher by profession, ML researcher by obsession.</p>
+    <nav aria-label="Contact and profiles">
+      <ul>
+        <li><a href="mailto:amitaminov1@gmail.com">Email</a></li>
+        <li><a href="https://github.com/amitaminov">GitHub</a></li>
+        <!-- TODO: replace href="#" with link to redacted CV PDF when ready -->
+        <li><a href="#">CV</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ================= BIO ================= -->
+    <section aria-labelledby="bio-h">
+      <h2 id="bio-h">About</h2>
+      <p>
+        I started in physics (B.Sc., Bar-Ilan&rsquo;s program for youth gifted in
+        mathematics) because I wanted models that are actually accountable to
+        reality. That instinct carried into military operations research
+        &mdash; first leading an OR and data-science team in Unit&nbsp;8200,
+        then in the IAF&rsquo;s Operations Research Branch, work recognized
+        with the Israel Defense Prize. Today, in my research M.Sc. at the Hebrew University, I
+        study the strongest form of accountability I know: machine learning
+        for formal reasoning &mdash; fine-tuning LLMs to prove theorems in
+        Lean, where a verifier, not a leaderboard, decides what counts.
+      </p>
+
+      <ul class="timeline">
+        <li>
+          <span class="when">2023&ndash;</span>
+          <span>M.Sc. Computer Science (research), Hebrew University of Jerusalem</span>
+        </li>
+        <li>
+          <span class="when">2024&ndash;</span>
+          <span>IAF Operations Research Branch &middot; Israel Defense Prize</span>
+        </li>
+        <li>
+          <span class="when">2022&ndash;2024</span>
+          <span>Unit 8200 &middot; OR &amp; data-science team lead</span>
+        </li>
+        <li>
+          <span class="when">2018&ndash;2021</span>
+          <span>B.Sc. Physics, Bar-Ilan University (gifted-in-math program)</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ================= FEATURED PROJECTS ================= -->
+    <section aria-labelledby="projects-h">
+      <h2 id="projects-h">Featured projects</h2>
+      <ul class="projects">
+
+        <!-- ---- Generated Formal Theorem Proofs ---- -->
+        <li class="project">
+          <div class="thumb">
+            <picture>
+              <source type="image/svg+xml" srcset="figures/fig2_headline_comparison.svg">
+              <img src="figures/fig2_headline_comparison.png"
+                   alt="Bar chart: a goal-blind frequency sampler proves 26.2% of miniF2F versus 49.6% for a 7B neural prover under the same search budget."
+                   width="2988" height="1466">
+            </picture>
+          </div>
+          <div class="desc">
+            <!-- Repo link is a placeholder — activate at publish -->
+            <h3><a href="https://github.com/amitaminov/generated-formal-theorem-proofs">Generated Formal Theorem Proofs</a></h3>
+            <p>Goal-blind samplers of Mathlib4&rsquo;s empirical tactic distribution &mdash; never reading the goal &mdash; prove about a quarter of miniF2F Test (26.2%), roughly half of what a 7B neural prover achieves under the identical search budget (49.6%).</p>
+            <ul class="chips" aria-label="Project categories">
+              <li class="chip ml">ML &amp; LLMs</li>
+              <li class="chip stats">Statistics</li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- ---- AI·DS·ML·DL Researcher ---- -->
+        <li class="project">
+          <div class="thumb">
+            <img src="figures/researcher.png"
+                 alt="Screenshot: paper-reproduction dashboard as of July 2026 with 41 papers, 14 reproduced, searchable cards showing per-paper figures, tests, and full/partial/minimal verdicts."
+                 width="1440" height="900">
+          </div>
+          <div class="desc">
+            <!-- Repo link is a placeholder — activate at publish -->
+            <h3><a href="https://github.com/amitaminov/ai-ds-ml-dl-researcher">AI&middot;DS&middot;ML&middot;DL Researcher</a></h3>
+            <p>An autonomous paper-reproduction harness whose integrity contracts score only artifacts on disk &mdash; honest negatives and &ldquo;the agent didn&rsquo;t finish&rdquo; are first-class results.</p>
+            <ul class="chips" aria-label="Project categories">
+              <li class="chip ml">ML &amp; LLMs</li>
+              <li class="chip eng">Engineering</li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- ---- room-occupancy ---- -->
+        <li class="project">
+          <div class="thumb">
+            <picture>
+              <source type="image/svg+xml" srcset="figures/split_leakage.svg">
+              <img src="figures/split_leakage.png"
+                   alt="Chart: a shuffled split leaks near-duplicate rows and inflates macro-F1 by 21 to 62 points to near-perfect scores for every model, versus an honest chronological split."
+                   width="2117" height="1212">
+            </picture>
+          </div>
+          <div class="desc">
+            <!-- Repo link is a placeholder — activate at publish -->
+            <h3><a href="https://github.com/amitaminov/room-occupancy">room-occupancy</a></h3>
+            <p>A shuffled split leaks near-duplicate rows &mdash; the median test row sits 30&nbsp;s from a training row &mdash; and inflates macro-F1 by 21&ndash;62 points to a near-perfect 0.977&ndash;0.996 for every model; under the honest train-on-past/test-on-future split, QDA reaches macro-F1 0.769.</p>
+            <p class="sublink"><a href="https://amitaminov.github.io/Room-Occupancy-Machine-Learning-Estimation/Room_Occupancy/data/Room%20Occupancy%20Signal%20Dashboard.html">Interactive dashboard &rarr;</a></p>
+            <ul class="chips" aria-label="Project categories">
+              <li class="chip stats">Statistics</li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- ---- Gaussian Geometry ---- -->
+        <li class="project">
+          <div class="thumb">
+            <picture>
+              <source type="image/svg+xml" srcset="figures/coverage_paradox.svg">
+              <img src="figures/coverage_paradox.png"
+                   alt="Two-panel chart: iso-density ellipses of a 2D Gaussian annotated with 1-, 2-, and 3-sigma coverage (39.3%, 86.5%, 98.9% versus the 1D 68/95/99.7 intuition), beside chi-squared mass-inside-k-sigma curves for dimensions 1 to 10."
+                   width="3137" height="1413">
+            </picture>
+          </div>
+          <div class="desc">
+            <!-- Repo link is a placeholder — activate at publish -->
+            <h3><a href="https://github.com/amitaminov/gaussian-geometry">Gaussian Geometry</a></h3>
+            <p>Proves rotation and construction of a covariance are exactly the same operation, shows the principal-axis angle is an ill-conditioned readout of correlation &mdash; it snaps to 45&deg; near equal variances &mdash; and quantifies the &sigma;-coverage paradox: the &ldquo;1&sigma;&rdquo; ellipse holds only 39% of the mass in 2D. All closed-form and unit-tested.</p>
+            <ul class="chips" aria-label="Project categories">
+              <li class="chip stats">Statistics</li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- ---- Decision Boundary Atlas ---- -->
+        <li class="project">
+          <div class="thumb">
+            <img src="figures/gamma_sweep_grid.png"
+                 alt="3-by-3 grid of RBF-SVM decision boundaries across a gamma sweep, from two smooth regions at gamma 0.03 to 282 memorized islands at gamma 100000 as test accuracy falls from 0.83 to 0.71."
+                 width="1280" height="1236">
+          </div>
+          <div class="desc">
+            <!-- Repo link is a placeholder — activate at publish -->
+            <h3><a href="https://github.com/amitaminov/decision-boundary-atlas">Decision Boundary Atlas</a></h3>
+            <p>SVM boundaries computed two independent ways &mdash; dual-form reconstruction vs grid extraction &mdash; agree to ~10<sup>&minus;12</sup>; a &gamma; sweep then measures overfitting as geometry, boundary length growing 1.2&rarr;13.8 and 2&rarr;282 memorized islands as test accuracy falls 0.827&rarr;0.714.</p>
+            <ul class="chips" aria-label="Project categories">
+              <li class="chip ml">ML &amp; LLMs</li>
+              <li class="chip stats">Statistics</li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- ---- Technical Interviewer ---- -->
+        <li class="project">
+          <div class="thumb">
+            <img src="figures/technical-interviewer.png"
+                 alt="Screenshot: interview setup screen with target role, interview mode, difficulty, duration, language, and hint-policy controls for a voice-driven mock interview."
+                 width="1440" height="900">
+          </div>
+          <div class="desc">
+            <!-- Repo link is a placeholder — activate at publish -->
+            <h3><a href="https://github.com/amitaminov/technical-interviewer">Technical Interviewer</a></h3>
+            <p>A voice-driven, lip-synced 3D mock interviewer where every dependency degrades gracefully &mdash; API to local CLI to a deterministic offline engine &mdash; with 221 tests that run with no API key.</p>
+            <ul class="chips" aria-label="Project categories">
+              <li class="chip eng">Engineering</li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- ---- TripWise ---- -->
+        <li class="project">
+          <div class="thumb">
+            <img src="figures/tripwise.png"
+                 alt="Screenshot: ranked destination comparison with scored cards for Istanbul, Prague, and South Italy plus a cost, flight, weather, visa, and safety table."
+                 width="1440" height="1806">
+          </div>
+          <div class="desc">
+            <!-- Repo link is a placeholder — activate at publish -->
+            <h3><a href="https://github.com/amitaminov/tripwise">TripWise</a></h3>
+            <p>A couples&rsquo; trip planner whose blind-rate-then-reveal mechanic is enforced by Postgres row-level security, not UI &mdash; with every external API behind a graceful-degradation port.</p>
+            <ul class="chips" aria-label="Project categories">
+              <li class="chip eng">Engineering</li>
+            </ul>
+          </div>
+        </li>
+
+      </ul>
+    </section>
+
+    <!-- ================= RESEARCH FOCUS ================= -->
+    <section aria-labelledby="research-h">
+      <h2 id="research-h">Research focus</h2>
+      <p>
+        The through-line is skepticism about claims: chronological splits
+        instead of shuffled ones, frequency-table baselines instead of only
+        model-vs-model comparisons, artifact-scored reproductions instead of
+        agent self-reports, and &mdash; ultimately &mdash; proofs checked by a
+        verifier.
+      </p>
+      <p>
+        My current work fine-tunes LLMs for theorem proving in Lean&nbsp;4
+        using GRPO, with the Lean verifier itself supplying the reward
+        signal: a proof either checks or it doesn&rsquo;t, so the model cannot
+        be rewarded for sounding right. Training runs on a university GPU
+        cluster against Mathlib-scale tactic data, with the goal-blind
+        frequency baselines from Generated Formal Theorem Proofs as the floor
+        any learned policy has to clear. The goal is a prover whose reported gains survive the same
+        skepticism the rest of this page applies to everything else.
+      </p>
+    </section>
+
+    <!-- ================= SKILLS ================= -->
+    <section class="skills" aria-labelledby="skills-h">
+      <h2 id="skills-h">Skills</h2>
+      <dl>
+        <dt>ML &amp; LLMs</dt>
+        <dd>PyTorch, Hugging Face, LLM fine-tuning (LoRA, GRPO), RL with verifier rewards, Lean&nbsp;4 / Mathlib, evaluation and baseline design</dd>
+        <dt>Statistics &amp; OR</dt>
+        <dd>Statistical modeling, experimental design, honest evaluation splits, simulation, optimization, resource-allocation modeling</dd>
+        <dt>Engineering</dt>
+        <dd>Python, SQL / Postgres (incl. row-level security), pytest, Git, Linux and HPC clusters (Slurm), graceful-degradation architecture</dd>
+      </dl>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section aria-labelledby="contact-h">
+      <h2 id="contact-h">Contact</h2>
+      <p>
+        <a href="mailto:amitaminov1@gmail.com">amitaminov1@gmail.com</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://github.com/amitaminov">github.com/amitaminov</a>
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Amit Aminov &middot; last updated July 2026</p>
+  </footer>
+
+</div>
+
+</body>
+</html>

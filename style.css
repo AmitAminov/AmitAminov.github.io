@@ -1,0 +1,336 @@
+/* ============================================================
+   Amit Aminov — personal site
+   Palette:
+     text        #1A1A1A (near-black)
+     headings    #0F4C5C
+     accent      #E36414 (single interactive accent: link underlines,
+                 hover emphasis, focus outlines — never body-text color)
+     rules       #546A7B (thin)
+     tag chips   #5F0F40 / #9A031E / #546A7B (categorical only)
+   One type family (system stack), zero external requests.
+   ============================================================ */
+
+:root {
+  --text: #1a1a1a;
+  --heading: #0f4c5c;
+  --accent: #e36414;
+  --rule: #546a7b;
+  --chip-ml: #5f0f40;
+  --chip-stats: #9a031e;
+  --chip-eng: #546a7b;
+  --muted: #4a5560;
+  --measure: 68ch;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: #fff;
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.0625rem; /* 17px */
+  line-height: 1.6;
+}
+
+/* ---- layout -------------------------------------------------- */
+
+.container {
+  max-width: 46rem; /* holds body copy near the 68ch measure */
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+main > section,
+header.hero {
+  padding: 2.25rem 0;
+}
+
+main > section + section {
+  border-top: 1px solid var(--rule);
+}
+
+header.hero {
+  border-bottom: 1px solid var(--rule);
+}
+
+p {
+  max-width: var(--measure);
+}
+
+/* ---- headings ------------------------------------------------ */
+
+h1,
+h2,
+h3 {
+  color: var(--heading);
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 2rem;
+  margin: 0 0 0.25rem;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-size: 1.3rem;
+  margin: 0 0 1rem;
+}
+
+h3 {
+  font-size: 1.05rem;
+  margin: 0 0 0.2rem;
+}
+
+/* ---- links: near-black text with accent underline;
+        full accent on hover/focus (contrast-safe default state) */
+
+a {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 2px;
+}
+
+/* hover/focus keep near-black text (accent #E36414 on white is 3.4:1,
+   below AA) and signal state with a heavier accent underline / outline */
+a:hover {
+  text-decoration-thickness: 3px;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+h3 a {
+  color: var(--heading);
+}
+
+/* ---- hero ---------------------------------------------------- */
+
+.hero .tagline {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--heading);
+  margin: 0 0 0.35rem;
+}
+
+.hero .subline {
+  margin: 0 0 1.1rem;
+  color: var(--muted);
+}
+
+.hero nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.5rem;
+}
+
+/* ---- timeline (compact, present-to-past) --------------------- */
+
+.timeline {
+  list-style: none;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  max-width: var(--measure);
+}
+
+.timeline li {
+  display: flex;
+  gap: 1rem;
+  padding: 0.3rem 0;
+}
+
+.timeline .when {
+  flex: 0 0 6.5rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ---- project rows (Barron-style) ----------------------------- */
+
+.projects {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.project {
+  display: flex;
+  gap: 1.4rem;
+  align-items: flex-start;
+  padding: 1.3rem 0;
+}
+
+.project + .project {
+  border-top: 1px dotted var(--rule);
+}
+
+.project .thumb {
+  flex: 0 0 11rem;
+  width: 11rem;
+}
+
+.project .thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid #d7dde2;
+  border-radius: 4px;
+  background: #fff;
+}
+
+/* placeholder block: palette color monogram until a real
+   screenshot is dropped in */
+.thumb-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid #d7dde2;
+  border-radius: 4px;
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.thumb-placeholder.ml {
+  color: var(--chip-ml);
+  background: #f7eef4;
+}
+
+.thumb-placeholder.stats {
+  color: var(--chip-stats);
+  background: #faeef0;
+}
+
+.thumb-placeholder.eng {
+  color: var(--chip-eng);
+  background: #eef2f5;
+}
+
+.project .desc p {
+  margin: 0.25rem 0 0.5rem;
+}
+
+/* small secondary link inside a project row (e.g. live dashboard) */
+.project .desc p.sublink {
+  margin: -0.15rem 0 0.55rem;
+  font-size: 0.92rem;
+}
+
+/* ---- tag chips (categorical colors only) --------------------- */
+
+.chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+/* categorical text on matching light tints (same tints as the thumbnail
+   placeholders); white-on-#546A7B was 3.7:1, below AA at this size */
+.chip {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 0.12rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+}
+
+.chip.ml {
+  color: var(--chip-ml);
+  background: #f7eef4;
+}
+
+.chip.stats {
+  color: var(--chip-stats);
+  background: #faeef0;
+}
+
+.chip.eng {
+  color: var(--chip-eng);
+  background: #eef2f5;
+}
+
+/* ---- skills -------------------------------------------------- */
+
+.skills dl {
+  margin: 0;
+  max-width: var(--measure);
+}
+
+.skills dt {
+  font-weight: 700;
+  color: var(--heading);
+  margin-top: 0.8rem;
+}
+
+.skills dt:first-child {
+  margin-top: 0;
+}
+
+.skills dd {
+  margin: 0.1rem 0 0;
+}
+
+/* ---- footer -------------------------------------------------- */
+
+footer {
+  border-top: 1px solid var(--rule);
+  padding: 1.6rem 0 2.5rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* ---- small screens ------------------------------------------- */
+
+@media (max-width: 38rem) {
+  .project {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .project .thumb {
+    flex-basis: auto;
+    width: 100%;
+    max-width: 20rem;
+  }
+
+  .timeline li {
+    flex-direction: column;
+    gap: 0;
+    padding: 0.45rem 0;
+  }
+
+  /* the 6.5rem flex-basis becomes vertical height once the row
+     stacks — reset it so dates sit flush above their entries */
+  .timeline .when {
+    flex: none;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+  }
+}
