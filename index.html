@@ -78,8 +78,8 @@
             </picture>
           </div>
           <div class="desc">
-            <!-- Repo link is a placeholder — activate at publish -->
-            <h3><a href="https://github.com/amitaminov/generated-formal-theorem-proofs">Generated Formal Theorem Proofs</a></h3>
+            <!-- Repo not yet public — relink at publish: https://github.com/amitaminov/generated-formal-theorem-proofs -->
+            <h3>Generated Formal Theorem Proofs</h3>
             <p>Goal-blind samplers of Mathlib4&rsquo;s empirical tactic distribution &mdash; never reading the goal &mdash; prove about a quarter of miniF2F Test (26.2%), roughly half of what a 7B neural prover achieves under the identical search budget (49.6%).</p>
             <ul class="chips" aria-label="Project categories">
               <li class="chip ml">ML &amp; LLMs</li>
@@ -96,8 +96,8 @@
                  width="1440" height="900">
           </div>
           <div class="desc">
-            <!-- Repo link is a placeholder — activate at publish -->
-            <h3><a href="https://github.com/amitaminov/ai-ds-ml-dl-researcher">AI&middot;DS&middot;ML&middot;DL Researcher</a></h3>
+            <!-- Repo not yet public — relink at publish: https://github.com/amitaminov/ai-ds-ml-dl-researcher -->
+            <h3>AI&middot;DS&middot;ML&middot;DL Researcher</h3>
             <p>An autonomous paper-reproduction harness whose integrity contracts score only artifacts on disk &mdash; honest negatives and &ldquo;the agent didn&rsquo;t finish&rdquo; are first-class results.</p>
             <ul class="chips" aria-label="Project categories">
               <li class="chip ml">ML &amp; LLMs</li>
@@ -107,6 +107,9 @@
         </li>
 
         <!-- ---- room-occupancy ---- -->
+        <!-- figures/qda_test_replay.gif exists but reads worse than this bar chart
+             at 176px thumb size (thin step traces + small text vs bold bars), so the
+             static figure stays. -->
         <li class="project">
           <div class="thumb">
             <picture>
@@ -117,8 +120,8 @@
             </picture>
           </div>
           <div class="desc">
-            <!-- Repo link is a placeholder — activate at publish -->
-            <h3><a href="https://github.com/amitaminov/room-occupancy">room-occupancy</a></h3>
+            <!-- Repo not yet public — relink at publish: https://github.com/amitaminov/room-occupancy -->
+            <h3>room-occupancy</h3>
             <p>A shuffled split leaks near-duplicate rows &mdash; the median test row sits 30&nbsp;s from a training row &mdash; and inflates macro-F1 by 21&ndash;62 points to a near-perfect 0.977&ndash;0.996 for every model; under the honest train-on-past/test-on-future split, QDA reaches macro-F1 0.769.</p>
             <p class="sublink"><a href="https://amitaminov.github.io/Room-Occupancy-Machine-Learning-Estimation/Room_Occupancy/data/Room%20Occupancy%20Signal%20Dashboard.html">Interactive dashboard &rarr;</a></p>
             <ul class="chips" aria-label="Project categories">
@@ -130,16 +133,13 @@
         <!-- ---- Gaussian Geometry ---- -->
         <li class="project">
           <div class="thumb">
-            <picture>
-              <source type="image/svg+xml" srcset="figures/coverage_paradox.svg">
-              <img src="figures/coverage_paradox.png"
-                   alt="Two-panel chart: iso-density ellipses of a 2D Gaussian annotated with 1-, 2-, and 3-sigma coverage (39.3%, 86.5%, 98.9% versus the 1D 68/95/99.7 intuition), beside chi-squared mass-inside-k-sigma curves for dimensions 1 to 10."
-                   width="3137" height="1413">
-            </picture>
+            <img src="figures/density_ridge_plotly.gif"
+                 alt="Animation: 3D density surface of a bivariate Gaussian while the camera orbits and the correlation sweeps from -0.85 to +0.85 and back; the surface squeezes onto a diagonal ridge and the peak rises as 1 over the square root of 1 minus rho squared, with a live rho and peak-height readout."
+                 width="640" height="400">
           </div>
           <div class="desc">
-            <!-- Repo link is a placeholder — activate at publish -->
-            <h3><a href="https://github.com/amitaminov/gaussian-geometry">Gaussian Geometry</a></h3>
+            <!-- Repo not yet public — relink at publish: https://github.com/amitaminov/gaussian-geometry -->
+            <h3>Gaussian Geometry</h3>
             <p>Proves rotation and construction of a covariance are exactly the same operation, shows the principal-axis angle is an ill-conditioned readout of correlation &mdash; it snaps to 45&deg; near equal variances &mdash; and quantifies the &sigma;-coverage paradox: the &ldquo;1&sigma;&rdquo; ellipse holds only 39% of the mass in 2D. All closed-form and unit-tested.</p>
             <ul class="chips" aria-label="Project categories">
               <li class="chip stats">Statistics</li>
@@ -150,13 +150,13 @@
         <!-- ---- Decision Boundary Atlas ---- -->
         <li class="project">
           <div class="thumb">
-            <img src="figures/gamma_sweep_grid.png"
-                 alt="3-by-3 grid of RBF-SVM decision boundaries across a gamma sweep, from two smooth regions at gamma 0.03 to 282 memorized islands at gamma 100000 as test accuracy falls from 0.83 to 0.71."
-                 width="1280" height="1236">
+            <img src="figures/gamma_sweep_animated.gif"
+                 alt="Animation: an RBF-SVM decision boundary in 2D PCA space morphs from an underfit near-plane through the gamma-300 sweet spot into 282 memorized islands, while a live readout tracks the regime, gamma, train and test accuracy, boundary length, and region count."
+                 width="640" height="400">
           </div>
           <div class="desc">
-            <!-- Repo link is a placeholder — activate at publish -->
-            <h3><a href="https://github.com/amitaminov/decision-boundary-atlas">Decision Boundary Atlas</a></h3>
+            <!-- Repo not yet public — relink at publish: https://github.com/amitaminov/decision-boundary-atlas -->
+            <h3>Decision Boundary Atlas</h3>
             <p>SVM boundaries computed two independent ways &mdash; dual-form reconstruction vs grid extraction &mdash; agree to ~10<sup>&minus;12</sup>; a &gamma; sweep then measures overfitting as geometry, boundary length growing 1.2&rarr;13.8 and 2&rarr;282 memorized islands as test accuracy falls 0.827&rarr;0.714.</p>
             <ul class="chips" aria-label="Project categories">
               <li class="chip ml">ML &amp; LLMs</li>
@@ -173,8 +173,8 @@
                  width="1440" height="900">
           </div>
           <div class="desc">
-            <!-- Repo link is a placeholder — activate at publish -->
-            <h3><a href="https://github.com/amitaminov/technical-interviewer">Technical Interviewer</a></h3>
+            <!-- Repo not yet public — relink at publish: https://github.com/amitaminov/technical-interviewer -->
+            <h3>Technical Interviewer</h3>
             <p>A voice-driven, lip-synced 3D mock interviewer where every dependency degrades gracefully &mdash; API to local CLI to a deterministic offline engine &mdash; with 221 tests that run with no API key.</p>
             <ul class="chips" aria-label="Project categories">
               <li class="chip eng">Engineering</li>
@@ -190,8 +190,8 @@
                  width="1440" height="1806">
           </div>
           <div class="desc">
-            <!-- Repo link is a placeholder — activate at publish -->
-            <h3><a href="https://github.com/amitaminov/tripwise">TripWise</a></h3>
+            <!-- Repo not yet public — relink at publish: https://github.com/amitaminov/tripwise -->
+            <h3>TripWise</h3>
             <p>A couples&rsquo; trip planner whose blind-rate-then-reveal mechanic is enforced by Postgres row-level security, not UI &mdash; with every external API behind a graceful-degradation port.</p>
             <ul class="chips" aria-label="Project categories">
               <li class="chip eng">Engineering</li>
