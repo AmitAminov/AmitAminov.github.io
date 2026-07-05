@@ -1,25 +1,63 @@
 /* ============================================================
    Amit Aminov — personal site
-   Palette:
-     text        #1A1A1A (near-black)
-     headings    #0F4C5C
-     accent      #E36414 (single interactive accent: link underlines,
-                 hover emphasis, focus outlines — never body-text color)
-     rules       #546A7B (thin)
-     tag chips   #5F0F40 / #9A031E / #546A7B (categorical only)
-   One type family (system stack), zero external requests.
+   Theme: "grass green · matte black · autumn orange" (nature-science)
+
+   Bands
+     HERO      full-bleed hillside photo, left matte-black scrim, light text
+     CONTENT   warm parchment paper; forest-green serif headings;
+               autumn-orange link underlines (color is a *signal*, never the
+               sole cue — underline weight carries state for AA/color-blind)
+     FOOTER    full-bleed autumn-forest photo, matte-black scrim, light text
+
+   Type: system sans for body; a websafe serif display stack for headings
+         (science-journal feel). Zero external / network requests.
    ============================================================ */
 
 :root {
-  --text: #1a1a1a;
-  --heading: #0f4c5c;
-  --accent: #e36414;
-  --rule: #546a7b;
-  --chip-ml: #5f0f40;
-  --chip-stats: #9a031e;
-  --chip-eng: #546a7b;
-  --muted: #4a5560;
+  /* --- matte black (dark band backgrounds + scrims) --- */
+  --ink: #16180f;
+  --ink-2: #1a1c14;
+  --ink-deep: #0f110b;
+
+  /* --- parchment (content background) --- */
+  --parchment: #f4efe4;
+  --parchment-2: #f2ecdd;
+  --card: #fbf8f1; /* near-white card so white plots/GIFs sit naturally */
+
+  /* --- forest / structural green --- */
+  --forest: #2f4a2c; /* headings */
+  --forest-2: #3e5c36;
+  --grass: #6e9f42;
+  --grass-2: #79a94c;
+
+  /* --- autumn / accent --- */
+  --autumn: #c65d22; /* pumpkin */
+  --amber: #de8a22;
+  --rust: #a8431a; /* link underline / focus on light (deep enough for AA UI) */
+
+  /* --- text --- */
+  --text: #20221a; /* on parchment  — ~13:1 */
+  --muted: #55604a; /* muted olive on parchment — ~5.4:1 */
+  --on-dark: #f0ead8; /* on ink — ~13:1 */
+  --on-dark-muted: #cdc7b2;
+
+  /* --- structural --- */
+  --rule: #cabf9f; /* thin warm green-brown rule on parchment */
+  --rule-soft: #ded4bd;
+
+  /* --- categorical chip families (kept, retinted into theme) --- */
+  --chip-ml: #2f4a2c; /* green   */
+  --chip-ml-bg: #e7eedd;
+  --chip-stats: #8a3a18; /* rust    */
+  --chip-stats-bg: #f4e4d7;
+  --chip-eng: #4a3b2a; /* bark    */
+  --chip-eng-bg: #ece2d0;
+
   --measure: 68ch;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua",
+    Georgia, "Times New Roman", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
 }
 
 * {
@@ -28,14 +66,14 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
-  background: #fff;
+  background: var(--parchment);
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--sans);
   font-size: 1.0625rem; /* 17px */
   line-height: 1.6;
 }
@@ -48,17 +86,12 @@ body {
   padding: 0 1.25rem;
 }
 
-main > section,
-header.hero {
-  padding: 2.25rem 0;
+main > section {
+  padding: 2.4rem 0;
 }
 
 main > section + section {
   border-top: 1px solid var(--rule);
-}
-
-header.hero {
-  border-bottom: 1px solid var(--rule);
 }
 
 p {
@@ -70,67 +103,163 @@ p {
 h1,
 h2,
 h3 {
-  color: var(--heading);
-  line-height: 1.25;
+  color: var(--forest);
+  line-height: 1.22;
   font-weight: 700;
 }
 
+h1,
+h2 {
+  font-family: var(--serif);
+  letter-spacing: 0.005em;
+}
+
 h1 {
-  font-size: 2rem;
-  margin: 0 0 0.25rem;
-  letter-spacing: -0.01em;
+  font-size: 2.6rem;
+  margin: 0 0 0.4rem;
+  letter-spacing: -0.005em;
 }
 
 h2 {
-  font-size: 1.3rem;
+  font-size: 1.55rem;
+  font-weight: 600;
   margin: 0 0 1rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+/* a short grass rule under every section heading — organic accent */
+h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 2.4rem;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--grass);
 }
 
 h3 {
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   margin: 0 0 0.2rem;
 }
 
-/* ---- links: near-black text with accent underline;
-        full accent on hover/focus (contrast-safe default state) */
+/* ---- links: text stays high-contrast; autumn underline carries the
+        signal; hover/focus thicken the underline (never color-only) --- */
 
 a {
   color: var(--text);
   text-decoration: underline;
-  text-decoration-color: var(--accent);
+  text-decoration-color: var(--rust);
   text-decoration-thickness: 1.5px;
   text-underline-offset: 2px;
+  transition: text-decoration-thickness 0.12s ease, color 0.12s ease;
 }
 
-/* hover/focus keep near-black text (accent #E36414 on white is 3.4:1,
-   below AA) and signal state with a heavier accent underline / outline */
 a:hover {
+  color: var(--rust);
   text-decoration-thickness: 3px;
 }
 
 a:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--rust);
   outline-offset: 2px;
   border-radius: 2px;
 }
 
 h3 a {
-  color: var(--heading);
+  color: var(--forest);
 }
 
-/* ---- hero ---------------------------------------------------- */
+h3 a:hover {
+  color: var(--forest-2);
+}
+
+/* ============================================================
+   HERO — full-bleed photo, left matte-black scrim, light text
+   ============================================================ */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  min-height: min(78vh, 620px);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  /* smooth hand-off into the parchment content band */
+  background: var(--parchment);
+}
+
+.hero__bg,
+.hero__bg img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+
+.hero__bg img {
+  object-fit: cover;
+  object-position: 72% 30%; /* keep the subject (right third) & his face in frame */
+  display: block;
+}
+
+/* Left-anchored scrim so the name/nav stay crisp over the hazy sky while the
+   face on the right stays visible. A second vertical fade darkens the base of
+   the text column and melts the photo into the parchment below. */
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+      105deg,
+      rgba(16, 17, 11, 0.85) 0%,
+      rgba(16, 17, 11, 0.62) 34%,
+      rgba(16, 17, 11, 0.22) 58%,
+      rgba(16, 17, 11, 0) 74%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(16, 17, 11, 0) 55%,
+      rgba(16, 17, 11, 0.35) 85%,
+      var(--parchment) 100%
+    );
+}
+
+.hero__inner {
+  width: 100%;
+  padding-top: 3.5rem;
+  padding-bottom: 3rem;
+  color: var(--on-dark);
+}
+
+.hero__inner h1,
+.hero__inner .tagline {
+  color: #fff;
+  text-shadow: 0 1px 14px rgba(10, 11, 6, 0.55);
+}
+
+.hero__inner h1 {
+  max-width: 18ch;
+}
 
 .hero .tagline {
-  font-size: 1.2rem;
+  font-family: var(--serif);
+  font-size: 1.5rem;
   font-weight: 600;
-  color: var(--heading);
-  margin: 0 0 0.35rem;
+  font-style: italic;
+  margin: 0 0 0.5rem;
+  max-width: 26ch;
 }
 
 .hero .subline {
-  margin: 0 0 1.1rem;
-  color: var(--muted);
-  text-wrap: balance; /* avoids the one-word second line at desktop widths */
+  margin: 0 0 1.4rem;
+  color: var(--on-dark);
+  max-width: 46ch;
+  text-wrap: balance;
+  text-shadow: 0 1px 10px rgba(10, 11, 6, 0.6);
 }
 
 .hero nav ul {
@@ -139,7 +268,31 @@ h3 a {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem 1.5rem;
+  gap: 0.4rem 0.9rem;
+}
+
+/* pill nav on the dark hero: light text, autumn-amber underline signal */
+.hero nav a {
+  display: inline-block;
+  color: var(--on-dark);
+  text-decoration-color: var(--amber);
+  padding: 0.35rem 0.9rem;
+  border: 1px solid rgba(240, 234, 216, 0.35);
+  border-radius: 999px;
+  background: rgba(16, 17, 11, 0.28);
+  backdrop-filter: blur(2px);
+}
+
+.hero nav a:hover {
+  color: #fff;
+  border-color: var(--amber);
+  background: rgba(198, 93, 34, 0.28);
+  text-decoration-thickness: 3px;
+}
+
+.hero nav a:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
 }
 
 /* ---- timeline (compact, present-to-past) --------------------- */
@@ -154,17 +307,25 @@ h3 a {
 .timeline li {
   display: flex;
   gap: 1rem;
-  padding: 0.3rem 0;
+  padding: 0.4rem 0;
+  border-left: 2px solid var(--rule-soft);
+  padding-left: 1rem;
+  margin-left: 0.2rem;
+}
+
+.timeline li:hover {
+  border-left-color: var(--grass);
 }
 
 .timeline .when {
   flex: 0 0 5.5rem;
   color: var(--muted);
   font-variant-numeric: tabular-nums;
+  font-weight: 600;
   white-space: nowrap;
 }
 
-/* ---- project rows (Barron-style) ----------------------------- */
+/* ---- project rows -------------------------------------------- */
 
 .projects {
   list-style: none;
@@ -176,11 +337,25 @@ h3 a {
   display: flex;
   gap: 1.4rem;
   align-items: flex-start;
-  padding: 1.3rem 0;
+  padding: 1.4rem;
+  background: var(--card);
+  border: 1px solid var(--rule-soft);
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(47, 74, 44, 0.05),
+    0 6px 18px rgba(31, 33, 20, 0.05);
+  transition: box-shadow 0.18s ease, transform 0.18s ease,
+    border-color 0.18s ease;
 }
 
 .project + .project {
-  border-top: 1px dotted var(--rule);
+  margin-top: 1rem;
+}
+
+.project:hover {
+  border-color: var(--grass);
+  box-shadow: 0 2px 4px rgba(47, 74, 44, 0.08),
+    0 12px 28px rgba(31, 33, 20, 0.1);
+  transform: translateY(-2px);
 }
 
 .project .thumb {
@@ -188,7 +363,7 @@ h3 a {
   width: 11rem;
 }
 
-/* uniform 16:10 frame so all seven rows scan at the same height;
+/* uniform 16:10 frame so all seven rows scan at one height;
    plots letterbox invisibly on their own white background */
 .project .thumb img {
   display: block;
@@ -196,46 +371,15 @@ h3 a {
   height: auto; /* neutralize the HTML height attribute so aspect-ratio wins */
   aspect-ratio: 16 / 10;
   object-fit: contain;
-  border: 1px solid #d7dde2;
-  border-radius: 4px;
+  border: 1px solid var(--rule-soft);
+  border-radius: 6px;
   background: #fff;
 }
 
-/* tall app screenshots: crop from the top instead of shrinking
-   to a sliver inside the frame */
+/* tall app screenshots: crop from the top rather than shrink to a sliver */
 .project .thumb img.cover {
   object-fit: cover;
   object-position: top;
-}
-
-/* placeholder block: palette color monogram until a real
-   screenshot is dropped in */
-.thumb-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  aspect-ratio: 16 / 10; /* matches the real-thumbnail frame */
-  border: 1px solid #d7dde2;
-  border-radius: 4px;
-  font-size: 2.4rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.thumb-placeholder.ml {
-  color: var(--chip-ml);
-  background: #f7eef4;
-}
-
-.thumb-placeholder.stats {
-  color: var(--chip-stats);
-  background: #faeef0;
-}
-
-.thumb-placeholder.eng {
-  color: var(--chip-eng);
-  background: #eef2f5;
 }
 
 .project .desc p {
@@ -252,38 +396,36 @@ h3 a {
 
 .chips {
   list-style: none;
-  margin: 0;
+  margin: 0.2rem 0 0;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
 }
 
-/* categorical text on matching light tints (same tints as the thumbnail
-   placeholders); white-on-#546A7B was 3.7:1, below AA at this size */
 .chip {
   display: inline-block;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.03em;
-  padding: 0.12rem 0.55rem;
+  padding: 0.14rem 0.6rem;
   border-radius: 999px;
   border: 1px solid currentColor;
 }
 
 .chip.ml {
   color: var(--chip-ml);
-  background: #f7eef4;
+  background: var(--chip-ml-bg);
 }
 
 .chip.stats {
   color: var(--chip-stats);
-  background: #faeef0;
+  background: var(--chip-stats-bg);
 }
 
 .chip.eng {
   color: var(--chip-eng);
-  background: #eef2f5;
+  background: var(--chip-eng-bg);
 }
 
 /* ---- skills -------------------------------------------------- */
@@ -295,8 +437,10 @@ h3 a {
 
 .skills dt {
   font-weight: 700;
-  color: var(--heading);
-  margin-top: 0.8rem;
+  color: var(--forest);
+  margin-top: 0.9rem;
+  padding-left: 0.8rem;
+  border-left: 3px solid var(--grass);
 }
 
 .skills dt:first-child {
@@ -304,24 +448,135 @@ h3 a {
 }
 
 .skills dd {
-  margin: 0.1rem 0 0;
+  margin: 0.15rem 0 0;
+  padding-left: 0.8rem;
 }
 
-/* ---- footer -------------------------------------------------- */
+/* ============================================================
+   CONTACT / FOOTER — full-bleed autumn forest, matte-black scrim
+   ============================================================ */
 
-footer {
-  border-top: 1px solid var(--rule);
-  padding: 1.6rem 0 2.5rem;
-  color: var(--muted);
+.site-footer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin-top: 2.5rem;
+  color: var(--on-dark);
+  background: var(--ink);
+}
+
+.site-footer__bg,
+.site-footer__bg img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+
+.site-footer__bg img {
+  object-fit: cover;
+  object-position: center 40%;
+  display: block;
+}
+
+/* top-fade from parchment into the dark forest for a smooth hand-off,
+   plus an overall matte-black wash to hold text contrast over the photo */
+.site-footer__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+      to bottom,
+      var(--parchment) 0%,
+      rgba(16, 17, 11, 0.72) 16%,
+      rgba(16, 17, 11, 0.6) 55%,
+      rgba(15, 17, 11, 0.82) 100%
+    );
+}
+
+.site-footer__inner {
+  padding-top: 3.4rem;
+  padding-bottom: 2.6rem;
+}
+
+.site-footer h2 {
+  color: var(--on-dark);
+}
+
+.site-footer h2::after {
+  background: var(--amber);
+}
+
+.site-footer a {
+  color: var(--on-dark);
+  text-decoration-color: var(--amber);
+}
+
+.site-footer a:hover {
+  color: #fff;
+}
+
+.site-footer a:focus-visible {
+  outline: 2px solid var(--amber);
+}
+
+.colophon {
+  margin: 1.8rem 0 0;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(240, 234, 216, 0.18);
+  color: var(--on-dark-muted);
   font-size: 0.95rem;
 }
 
 /* ---- small screens ------------------------------------------- */
 
+@media (max-width: 700px) {
+  /* On narrow viewports the subject can crowd the text column, so the scrim
+     goes near-uniform (top-to-bottom) to guarantee AA contrast for the name,
+     and the crop leans right to keep the hazy sky behind the copy. */
+  .hero {
+    min-height: min(88vh, 560px);
+    align-items: center;
+  }
+
+  .hero__bg img {
+    object-position: 78% 26%;
+  }
+
+  .hero__scrim {
+    background: linear-gradient(
+        105deg,
+        rgba(16, 17, 11, 0.9) 0%,
+        rgba(16, 17, 11, 0.72) 55%,
+        rgba(16, 17, 11, 0.5) 100%
+      ),
+      linear-gradient(
+        to bottom,
+        rgba(16, 17, 11, 0.35) 0%,
+        rgba(16, 17, 11, 0.2) 60%,
+        var(--parchment) 100%
+      );
+  }
+}
+
 @media (max-width: 38rem) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.35rem;
+  }
+
+  .hero .tagline {
+    font-size: 1.25rem;
+  }
+
   .project {
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 0.9rem;
+    padding: 1.1rem;
   }
 
   .project .thumb {
@@ -333,16 +588,53 @@ footer {
   .timeline li {
     flex-direction: column;
     gap: 0;
-    padding: 0.45rem 0;
+    padding: 0.5rem 0 0.5rem 1rem;
   }
 
-  /* the 6.5rem flex-basis becomes vertical height once the row
-     stacks — reset it so dates sit flush above their entries */
+  /* the flex-basis becomes vertical height once the row stacks — reset it
+     so dates sit flush above their entries */
   .timeline .when {
     flex: none;
   }
+}
 
-  h1 {
-    font-size: 1.7rem;
+/* ============================================================
+   FALLING-LEAVES LAYER — fixed, decorative, non-interactive
+   Sits above the background bands + content but never receives
+   pointer events; leaves are drawn subtle/low-opacity so body and
+   hero text keep their AA contrast. Painted by assets/leaves.js.
+   ============================================================ */
+
+#leaf-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 4; /* above hero/footer photos + parchment content, purely visual */
+  pointer-events: none; /* never blocks clicks, selection, or scrolling */
+}
+
+#leaf-layer canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ---- motion / accessibility --------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* No falling leaves for readers who asked for reduced motion.
+     leaves.js also bails out of its rAF loop under this query — the
+     display:none is a belt-and-braces guard so nothing paints. */
+  #leaf-layer {
+    display: none !important;
   }
 }

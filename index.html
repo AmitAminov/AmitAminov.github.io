@@ -9,10 +9,20 @@
 </head>
 <body>
 
-<div class="container">
+<!-- Scroll-driven falling-leaves layer (canvas injected by leaves.js).
+     Fixed, pointer-events:none, decorative; honors prefers-reduced-motion. -->
+<div id="leaf-layer" aria-hidden="true"></div>
 
-  <!-- ================= HERO ================= -->
-  <header class="hero">
+<!-- ================= HERO (full-bleed personal photo) ================= -->
+<header class="hero">
+  <picture class="hero__bg" aria-hidden="true">
+    <source media="(max-width: 700px)" type="image/webp" srcset="assets/personal_hero_mobile.webp">
+    <source media="(max-width: 700px)" srcset="assets/personal_hero_mobile.jpg">
+    <source type="image/webp" srcset="assets/personal_hero.webp">
+    <img src="assets/personal_hero.jpg" alt="" decoding="async" fetchpriority="high">
+  </picture>
+  <div class="hero__scrim" aria-hidden="true"></div>
+  <div class="container hero__inner">
     <h1>Amit Aminov</h1>
     <p class="tagline">Machine learning for formal reasoning.</p>
     <p class="subline">Physicist by training, operations researcher by profession, ML researcher by obsession.</p>
@@ -23,7 +33,10 @@
         <li><a href="cv/amit-aminov-cv.pdf">CV</a></li>
       </ul>
     </nav>
-  </header>
+  </div>
+</header>
+
+<div class="container">
 
   <main>
 
@@ -237,7 +250,20 @@
       </dl>
     </section>
 
-    <!-- ================= CONTACT ================= -->
+  </main>
+
+</div>
+
+<!-- ================= CONTACT / FOOTER (full-bleed forest band) ================= -->
+<footer class="site-footer">
+  <picture class="site-footer__bg" aria-hidden="true">
+    <source media="(max-width: 700px)" type="image/webp" srcset="assets/forest_mobile.webp">
+    <source media="(max-width: 700px)" srcset="assets/forest_mobile.jpg">
+    <source type="image/webp" srcset="assets/forest.webp">
+    <img src="assets/forest.jpg" alt="" loading="lazy" decoding="async">
+  </picture>
+  <div class="site-footer__scrim" aria-hidden="true"></div>
+  <div class="container site-footer__inner">
     <section aria-labelledby="contact-h">
       <h2 id="contact-h">Contact</h2>
       <p>
@@ -246,14 +272,11 @@
         <a href="https://github.com/amitaminov">github.com/amitaminov</a>
       </p>
     </section>
+    <p class="colophon">Amit Aminov &middot; last updated July 2026</p>
+  </div>
+</footer>
 
-  </main>
-
-  <footer>
-    <p>Amit Aminov &middot; last updated July 2026</p>
-  </footer>
-
-</div>
+<script src="assets/leaves.js" defer></script>
 
 </body>
 </html>
