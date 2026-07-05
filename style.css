@@ -695,9 +695,19 @@ a:hover {
   border-radius: var(--radius-btn);
   border: 1px solid currentColor;
 }
-.chip.ml {
+.chip.llm {
   color: var(--lavender);
   background: rgba(185, 167, 255, 0.1);
+}
+.chip.mlearn {
+  /* sunrise orange, echoing the hero horizon */
+  color: var(--horizon);
+  background: rgba(255, 138, 120, 0.1);
+}
+.chip.signal {
+  /* navy-blue family, legible on the dark surface */
+  color: #8fb0ff;
+  background: rgba(96, 130, 235, 0.12);
 }
 .chip.stats {
   color: var(--data);
@@ -723,6 +733,14 @@ a:hover {
 }
 .skills dt:first-of-type {
   margin-top: 0;
+}
+.skills dt.sk-ml {
+  color: var(--horizon);
+  border-left-color: var(--horizon);
+}
+.skills dt.sk-llm {
+  color: var(--lavender);
+  border-left-color: var(--signal);
 }
 .skills dd {
   margin: 0.15rem 0 0;
