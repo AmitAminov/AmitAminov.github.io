@@ -1,63 +1,79 @@
 /* ============================================================
    Amit Aminov — personal site
-   Theme: "grass green · matte black · autumn orange" (nature-science)
+   Theme: "Lunar Intelligence" — a moonrise visual system for an
+   AI / Data / formal-reasoning portfolio.
 
-   Bands
-     HERO      full-bleed hillside photo, left matte-black scrim, light text
-     CONTENT   warm parchment paper; forest-green serif headings;
-               autumn-orange link underlines (color is a *signal*, never the
-               sole cue — underline weight carries state for AA/color-blind)
-     FOOTER    full-bleed autumn-forest photo, matte-black scrim, light text
+   Foundation Void #08081B; elevated Orbit surfaces #121A3A.
+   Violet / lavender = primary identity accents. Coral / peach only
+   at the moonrise horizon + rare emphasis. Cyan = graph lines,
+   active states, focus rings. Pulse green = rare status only.
 
-   Type: system sans for body; a websafe serif display stack for headings
-         (science-journal feel). Zero external / network requests.
+   Self-hosted fonts (no network requests). Motion is transform /
+   opacity only and lives in assets/lunar-motion.js; the static
+   scene is complete without JavaScript and under reduced motion.
    ============================================================ */
 
+/* ---- self-hosted fonts -------------------------------------- */
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/fonts/spacegrotesk-600.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/spacegrotesk-700.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/inter-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/fonts/inter-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/fonts/ibmplexmono-500.woff2") format("woff2");
+}
+
+/* ---- tokens -------------------------------------------------- */
 :root {
-  /* --- matte black (dark band backgrounds + scrims) --- */
-  --ink: #16180f;
-  --ink-2: #1a1c14;
-  --ink-deep: #0f110b;
+  --bg: #08081b; /* Void — page foundation */
+  --surface: #121a3a; /* Orbit — elevated surfaces */
+  --text: #f4f1ff;
+  --muted: #b8b4d2;
+  --signal: #6e56cf; /* violet identity */
+  --lavender: #b9a7ff;
+  --horizon: #ff8a78; /* coral — horizon + rare emphasis only */
+  --moon: #f7d7b5; /* peach */
+  --data: #78e7e7; /* cyan — graph lines, active, focus */
+  --pulse: #c8ff9b; /* rare status only */
+  --line: #32385a;
 
-  /* --- parchment (content background) --- */
-  --parchment: #f4efe4;
-  --parchment-2: #f2ecdd;
-  --card: #fbf8f1; /* near-white card so white plots/GIFs sit naturally */
-
-  /* --- forest / structural green --- */
-  --forest: #2f4a2c; /* headings */
-  --forest-2: #3e5c36;
-  --grass: #6e9f42;
-  --grass-2: #79a94c;
-
-  /* --- autumn / accent --- */
-  --autumn: #c65d22; /* pumpkin */
-  --amber: #de8a22;
-  --rust: #a8431a; /* link underline / focus on light (deep enough for AA UI) */
-
-  /* --- text --- */
-  --text: #20221a; /* on parchment  — ~13:1 */
-  --muted: #55604a; /* muted olive on parchment — ~5.4:1 */
-  --on-dark: #f0ead8; /* on ink — ~13:1 */
-  --on-dark-muted: #cdc7b2;
-
-  /* --- structural --- */
-  --rule: #cabf9f; /* thin warm green-brown rule on parchment */
-  --rule-soft: #ded4bd;
-
-  /* --- categorical chip families (kept, retinted into theme) --- */
-  --chip-ml: #2f4a2c; /* green   */
-  --chip-ml-bg: #e7eedd;
-  --chip-stats: #8a3a18; /* rust    */
-  --chip-stats-bg: #f4e4d7;
-  --chip-eng: #4a3b2a; /* bark    */
-  --chip-eng-bg: #ece2d0;
+  --radius-card: 18px;
+  --radius-btn: 12px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 
   --measure: 68ch;
-  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua",
-    Georgia, "Times New Roman", serif;
-  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  --display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas,
+    monospace;
 }
 
 * {
@@ -71,570 +87,931 @@ html {
 
 body {
   margin: 0;
-  background: var(--parchment);
+  background: var(--bg);
   color: var(--text);
   font-family: var(--sans);
   font-size: 1.0625rem; /* 17px */
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
-/* ---- layout -------------------------------------------------- */
+/* faint radial bloom behind the content foundation */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+      70% 50% at 78% 8%,
+      rgba(110, 86, 207, 0.14),
+      transparent 60%
+    ),
+    radial-gradient(60% 40% at 12% 30%, rgba(120, 231, 231, 0.05), transparent 60%);
+}
 
 .container {
-  max-width: 46rem; /* holds body copy near the 68ch measure */
+  max-width: 46rem;
   margin: 0 auto;
   padding: 0 1.25rem;
-}
-
-main > section {
-  padding: 2.4rem 0;
-}
-
-main > section + section {
-  border-top: 1px solid var(--rule);
 }
 
 p {
   max-width: var(--measure);
 }
 
-/* ---- headings ------------------------------------------------ */
+/* ---- skip link ---------------------------------------------- */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  z-index: 100;
+  background: var(--surface);
+  color: var(--text);
+  padding: 0.6rem 1rem;
+  border-radius: 0 0 var(--radius-btn) 0;
+  border: 1px solid var(--data);
+}
+.skip-link:focus {
+  left: 0;
+}
+
+/* ============================================================
+   TOP NAV — transparent over hero, frosted after scroll
+   ============================================================ */
+.topnav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  transition: background-color 0.25s ease, backdrop-filter 0.25s ease,
+    border-color 0.25s ease;
+  border-bottom: 1px solid transparent;
+  /* subtle top scrim so links stay legible over the sky */
+  background: linear-gradient(
+    to bottom,
+    rgba(8, 8, 27, 0.55),
+    rgba(8, 8, 27, 0)
+  );
+}
+.topnav.is-stuck {
+  background: rgba(8, 11, 27, 0.86);
+  backdrop-filter: blur(8px);
+  border-bottom-color: var(--line);
+}
+.topnav__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0.7rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.topnav__brand {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  color: var(--text);
+  text-decoration: none;
+}
+.topnav__brand:hover {
+  color: var(--lavender);
+}
+.topnav__links {
+  list-style: none;
+  display: flex;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+}
+.topnav__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 0.7rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+.topnav__links a:hover {
+  color: var(--text);
+}
+.topnav__links a.is-active {
+  color: var(--text);
+  border-bottom-color: var(--data);
+}
+
+/* ============================================================
+   BUTTONS — compact 12px radius, >=44px targets
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.55rem 1.15rem;
+  border-radius: var(--radius-btn);
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 0.98rem;
+  text-decoration: none;
+  color: var(--text);
+  background: rgba(18, 26, 58, 0.7);
+  border: 1px solid var(--line);
+  transition: border-color 0.12s ease, background-color 0.12s ease,
+    color 0.12s ease;
+}
+.btn:hover {
+  border-color: var(--lavender);
+  color: var(--text);
+}
+.btn--primary {
+  background: var(--signal);
+  border-color: var(--signal);
+  color: var(--text);
+  font-weight: 600;
+}
+.btn--primary:hover {
+  background: #7d66db;
+  border-color: var(--lavender);
+}
+
+/* ---- global focus ring -------------------------------------- */
+a:focus-visible,
+.btn:focus-visible {
+  outline: 2px solid var(--data);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ============================================================
+   HERO — Lunar Intelligence moonrise
+   ============================================================ */
+.hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 92svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--bg);
+  padding: 5rem 0 2rem;
+}
+
+.hero__grid {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: 54% 46%;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* ---- copy column -------------------------------------------- */
+.hero__copy {
+  position: relative;
+  max-width: 34rem;
+}
+/* local navy scrim under the copy so text keeps AA over the sky */
+.hero__copy::before {
+  content: "";
+  position: absolute;
+  inset: -1.5rem -2rem -1.5rem -2rem;
+  z-index: -1;
+  background: radial-gradient(
+    120% 120% at 20% 40%,
+    rgba(8, 8, 27, 0.72),
+    rgba(8, 8, 27, 0.28) 55%,
+    transparent 78%
+  );
+  pointer-events: none;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: var(--data);
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.6rem;
+  color: var(--text);
+}
+
+.hero .tagline {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+  line-height: 1.2;
+  margin: 0 0 0.7rem;
+  color: var(--lavender);
+  max-width: 24ch;
+}
+
+.hero .subline {
+  margin: 0 0 1.6rem;
+  color: var(--muted);
+  max-width: 42ch;
+  text-wrap: balance;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+/* ---- portrait ----------------------------------------------- */
+.hero__portrait {
+  position: relative;
+  z-index: 3;
+  justify-self: center;
+  width: 100%;
+  max-width: 460px;
+}
+.hero__portrait picture,
+.hero__portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.hero__portrait img {
+  /* violet rim light + deep-navy shadow, applied in CSS (not baked in) */
+  /* tight violet rim light (left) + deep-navy separation, no broad haze */
+  filter: drop-shadow(-2px 0 4px rgba(185, 167, 255, 0.55))
+    drop-shadow(3px 2px 5px rgba(8, 8, 24, 0.55))
+    drop-shadow(0 16px 30px rgba(4, 5, 16, 0.72));
+  -webkit-mask-image: linear-gradient(to bottom, #000 84%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 84%, transparent 100%);
+}
+
+/* ============================================================
+   HERO SCENE — decorative moonrise (aria-hidden)
+   ============================================================ */
+.hero__scene {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* layered sky: Void -> indigo/violet -> muted coral -> peach horizon */
+.sky {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    #08081b 0%,
+    #08081b 30%,
+    #1a1746 48%,
+    #34276b 58%,
+    #6a4a80 70%,
+    #ff8a78 80%,
+    #f7d7b5 88%,
+    #0b0c22 100%
+  );
+}
+/* left navy scrim to protect text-side contrast; keeps glow on the right */
+.sky::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(8, 8, 27, 0.8) 0%,
+    rgba(8, 8, 27, 0.42) 34%,
+    rgba(8, 8, 27, 0) 60%
+  );
+}
+
+/* atmospheric glow behind text + portrait */
+.moon-glow {
+  position: absolute;
+  left: 83.5%;
+  top: 38%;
+  width: clamp(420px, 52vw, 820px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(185, 167, 255, 0.32) 0%,
+    rgba(110, 86, 207, 0.2) 34%,
+    rgba(110, 86, 207, 0.08) 56%,
+    transparent 72%
+  );
+  filter: blur(4px);
+}
+
+/* the moon disc — offset behind-right so the portrait fronts its lower-left edge */
+.moon {
+  position: absolute;
+  left: 83.5%;
+  top: 38%;
+  width: clamp(260px, 30vw, 480px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 38% 36%,
+    #fdeed7 0%,
+    #f7d7b5 52%,
+    #ecc59d 78%,
+    #d8ac82 100%
+  );
+  box-shadow: 0 0 60px rgba(247, 215, 181, 0.28);
+}
+/* faint craters */
+.moon::before,
+.moon::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(199, 160, 120, 0.35);
+}
+.moon::before {
+  width: 12%;
+  height: 12%;
+  left: 54%;
+  top: 40%;
+}
+.moon::after {
+  width: 8%;
+  height: 8%;
+  left: 60%;
+  top: 62%;
+  box-shadow: -3.4em 0.4em 0 -0.2em rgba(199, 160, 120, 0.28);
+}
+
+/* constellation in the upper field, density toward the right */
+.constellation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 56%;
+}
+.con-nodes circle {
+  filter: drop-shadow(0 0 4px rgba(120, 231, 231, 0.7));
+}
+
+/* faceted low-poly terrain along the bottom */
+.terrain {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 26%;
+}
+.terrain-fill polygon {
+  fill: #0e1330;
+  stroke: none;
+}
+.terrain-fill polygon:nth-child(even) {
+  fill: #131a3d;
+}
+
+/* geometric particle field (leaf replacement) */
+.particles {
+  position: absolute;
+  inset: 0;
+}
+.pcl {
+  position: absolute;
+  width: var(--s);
+  height: var(--s);
+  opacity: 0.26;
+  overflow: visible;
+}
+
+/* ============================================================
+   CONTENT SECTIONS
+   ============================================================ */
+main > .container > section {
+  padding: 2.6rem 0;
+}
+main > .container > section + section {
+  border-top: 1px solid var(--line);
+}
 
 h1,
 h2,
 h3 {
-  color: var(--forest);
-  line-height: 1.22;
-  font-weight: 700;
-}
-
-h1,
-h2 {
-  font-family: var(--serif);
-  letter-spacing: 0.005em;
-}
-
-h1 {
-  font-size: 2.6rem;
-  margin: 0 0 0.4rem;
-  letter-spacing: -0.005em;
+  line-height: 1.2;
 }
 
 h2 {
-  font-size: 1.55rem;
+  font-family: var(--display);
   font-weight: 600;
+  font-size: 1.7rem;
+  letter-spacing: -0.005em;
+  color: var(--text);
   margin: 0 0 1rem;
-  position: relative;
-  padding-bottom: 0.5rem;
-}
-
-/* a short grass rule under every section heading — organic accent */
-h2::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 2.4rem;
-  height: 3px;
-  border-radius: 3px;
-  background: var(--grass);
 }
 
 h3 {
-  font-size: 1.08rem;
-  margin: 0 0 0.2rem;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.12rem;
+  color: var(--text);
+  margin: 0 0 0.25rem;
 }
 
-/* ---- links: text stays high-contrast; autumn underline carries the
-        signal; hover/focus thicken the underline (never color-only) --- */
+/* section dividers — one sparse motif per transition */
+.section-divider {
+  height: 30px;
+  margin: 0 0 1.3rem;
+  background-repeat: no-repeat;
+  background-position: left center;
+  opacity: 0.9;
+}
+.section-divider[data-motif="arc"] {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='170' height='30'%3E%3Cpath d='M5 26 A130 130 0 0 1 165 26' fill='none' stroke='%236E56CF' stroke-width='1.4' opacity='0.75'/%3E%3Ccircle cx='85' cy='3.6' r='2.6' fill='%2378E7E7'/%3E%3C/svg%3E");
+}
+.section-divider[data-motif="constellation"] {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='210' height='30'%3E%3Cpolyline points='10,22 62,8 118,23 180,10' fill='none' stroke='%2378E7E7' stroke-width='1' opacity='0.5'/%3E%3Cg fill='%23B9A7FF'%3E%3Ccircle cx='10' cy='22' r='2.4'/%3E%3Ccircle cx='62' cy='8' r='2.8'/%3E%3Ccircle cx='118' cy='23' r='2.4'/%3E%3Ccircle cx='180' cy='10' r='2.6'/%3E%3C/g%3E%3C/svg%3E");
+}
+.section-divider[data-motif="horizon"] {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='230' height='30'%3E%3Cpolyline points='4,24 52,10 100,20 154,6 226,22' fill='none' stroke='%23B9A7FF' stroke-width='1.2' opacity='0.6'/%3E%3C/svg%3E");
+}
 
+/* ---- links -------------------------------------------------- */
 a {
   color: var(--text);
   text-decoration: underline;
-  text-decoration-color: var(--rust);
+  text-decoration-color: var(--data);
   text-decoration-thickness: 1.5px;
   text-underline-offset: 2px;
-  transition: text-decoration-thickness 0.12s ease, color 0.12s ease;
+  transition: color 0.12s ease, text-decoration-thickness 0.12s ease;
 }
-
 a:hover {
-  color: var(--rust);
+  color: var(--data);
   text-decoration-thickness: 3px;
 }
 
-a:focus-visible {
-  outline: 2px solid var(--rust);
-  outline-offset: 2px;
-  border-radius: 2px;
-}
-
-h3 a {
-  color: var(--forest);
-}
-
-h3 a:hover {
-  color: var(--forest-2);
-}
-
-/* ============================================================
-   HERO — full-bleed photo, left matte-black scrim, light text
-   ============================================================ */
-
-.hero {
-  position: relative;
-  isolation: isolate;
-  min-height: min(78vh, 620px);
-  display: flex;
-  align-items: flex-end;
-  overflow: hidden;
-  /* smooth hand-off into the parchment content band */
-  background: var(--parchment);
-}
-
-.hero__bg,
-.hero__bg img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2;
-}
-
-.hero__bg img {
-  object-fit: cover;
-  object-position: 72% 30%; /* keep the subject (right third) & his face in frame */
-  display: block;
-}
-
-/* Left-anchored scrim so the name/nav stay crisp over the hazy sky while the
-   face on the right stays visible. A second vertical fade darkens the base of
-   the text column and melts the photo into the parchment below. */
-.hero__scrim {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(
-      105deg,
-      rgba(16, 17, 11, 0.85) 0%,
-      rgba(16, 17, 11, 0.62) 34%,
-      rgba(16, 17, 11, 0.22) 58%,
-      rgba(16, 17, 11, 0) 74%
-    ),
-    linear-gradient(
-      to bottom,
-      rgba(16, 17, 11, 0) 55%,
-      rgba(16, 17, 11, 0.35) 85%,
-      var(--parchment) 100%
-    );
-}
-
-.hero__inner {
-  width: 100%;
-  padding-top: 3.5rem;
-  padding-bottom: 3rem;
-  color: var(--on-dark);
-}
-
-.hero__inner h1,
-.hero__inner .tagline {
-  color: #fff;
-  text-shadow: 0 1px 14px rgba(10, 11, 6, 0.55);
-}
-
-.hero__inner h1 {
-  max-width: 18ch;
-}
-
-.hero .tagline {
-  font-family: var(--serif);
-  font-size: 1.5rem;
-  font-weight: 600;
-  font-style: italic;
-  margin: 0 0 0.5rem;
-  max-width: 26ch;
-}
-
-.hero .subline {
-  margin: 0 0 1.4rem;
-  color: var(--on-dark);
-  max-width: 46ch;
-  text-wrap: balance;
-  text-shadow: 0 1px 10px rgba(10, 11, 6, 0.6);
-}
-
-.hero nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem 0.9rem;
-}
-
-/* pill nav on the dark hero: light text, autumn-amber underline signal */
-.hero nav a {
-  display: inline-block;
-  color: var(--on-dark);
-  text-decoration-color: var(--amber);
-  padding: 0.35rem 0.9rem;
-  border: 1px solid rgba(240, 234, 216, 0.35);
-  border-radius: 999px;
-  background: rgba(16, 17, 11, 0.28);
-  backdrop-filter: blur(2px);
-}
-
-.hero nav a:hover {
-  color: #fff;
-  border-color: var(--amber);
-  background: rgba(198, 93, 34, 0.28);
-  text-decoration-thickness: 3px;
-}
-
-.hero nav a:focus-visible {
-  outline: 2px solid var(--amber);
-  outline-offset: 3px;
-}
-
-/* ---- timeline (compact, present-to-past) --------------------- */
-
+/* ---- timeline (neural-path spine) --------------------------- */
 .timeline {
   list-style: none;
   margin: 1.4rem 0 0;
   padding: 0;
   max-width: var(--measure);
 }
-
 .timeline li {
   display: flex;
   gap: 1rem;
-  padding: 0.4rem 0;
-  border-left: 2px solid var(--rule-soft);
+  padding: 0.5rem 0;
+  border-left: 2px solid var(--line);
   padding-left: 1rem;
   margin-left: 0.2rem;
+  transition: border-left-color 0.12s ease;
 }
-
 .timeline li:hover {
-  border-left-color: var(--grass);
+  border-left-color: var(--data);
 }
-
 .timeline .when {
-  flex: 0 0 5.5rem;
+  flex: 0 0 6.5rem;
   color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.85rem;
   font-variant-numeric: tabular-nums;
-  font-weight: 600;
   white-space: nowrap;
 }
 
-/* ---- project rows -------------------------------------------- */
-
+/* ---- project cards ------------------------------------------ */
 .projects {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-
 .project {
   display: flex;
   gap: 1.4rem;
   align-items: flex-start;
   padding: 1.4rem;
-  background: var(--card);
-  border: 1px solid var(--rule-soft);
-  border-radius: 10px;
-  box-shadow: 0 1px 2px rgba(47, 74, 44, 0.05),
-    0 6px 18px rgba(31, 33, 20, 0.05);
-  transition: box-shadow 0.18s ease, transform 0.18s ease,
-    border-color 0.18s ease;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  position: relative;
+  transition: border-color 0.18s ease;
 }
-
 .project + .project {
   margin-top: 1rem;
 }
-
-.project:hover {
-  border-color: var(--grass);
-  box-shadow: 0 2px 4px rgba(47, 74, 44, 0.08),
-    0 12px 28px rgba(31, 33, 20, 0.1);
-  transform: translateY(-2px);
+/* internal graph line that nudges 4px on hover */
+.project::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--signal),
+    var(--data),
+    transparent
+  );
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
 }
-
+.project:hover {
+  border-color: var(--lavender);
+}
+.project:hover::after {
+  opacity: 0.9;
+  transform: translateX(0);
+}
 .project .thumb {
   flex: 0 0 11rem;
   width: 11rem;
 }
-
-/* uniform 16:10 frame so all seven rows scan at one height;
-   plots letterbox invisibly on their own white background */
 .project .thumb img {
   display: block;
   width: 100%;
-  height: auto; /* neutralize the HTML height attribute so aspect-ratio wins */
+  height: auto;
   aspect-ratio: 16 / 10;
   object-fit: contain;
-  border: 1px solid var(--rule-soft);
-  border-radius: 6px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
   background: #fff;
+  transition: filter 0.18s ease;
 }
-
-/* tall app screenshots: crop from the top rather than shrink to a sliver */
 .project .thumb img.cover {
   object-fit: cover;
   object-position: top;
 }
-
+.project:hover .thumb img {
+  filter: contrast(1.06);
+}
 .project .desc p {
   margin: 0.25rem 0 0.5rem;
+  color: var(--muted);
 }
-
-/* small secondary link inside a project row (e.g. live dashboard) */
 .project .desc p.sublink {
   margin: -0.15rem 0 0.55rem;
   font-size: 0.92rem;
 }
+.project .desc p.sublink a {
+  color: var(--text);
+}
 
-/* ---- tag chips (categorical colors only) --------------------- */
-
+/* ---- chips (categorical, mono labels) ----------------------- */
 .chips {
   list-style: none;
-  margin: 0.2rem 0 0;
+  margin: 0.3rem 0 0;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
 }
-
 .chip {
   display: inline-block;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  padding: 0.14rem 0.6rem;
-  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 0.16rem 0.6rem;
+  border-radius: var(--radius-btn);
   border: 1px solid currentColor;
 }
-
 .chip.ml {
-  color: var(--chip-ml);
-  background: var(--chip-ml-bg);
+  color: var(--lavender);
+  background: rgba(185, 167, 255, 0.1);
 }
-
 .chip.stats {
-  color: var(--chip-stats);
-  background: var(--chip-stats-bg);
+  color: var(--data);
+  background: rgba(120, 231, 231, 0.09);
 }
-
 .chip.eng {
-  color: var(--chip-eng);
-  background: var(--chip-eng-bg);
+  color: var(--moon);
+  background: rgba(247, 215, 181, 0.09);
 }
 
-/* ---- skills -------------------------------------------------- */
-
+/* ---- skills ------------------------------------------------- */
 .skills dl {
   margin: 0;
   max-width: var(--measure);
 }
-
 .skills dt {
-  font-weight: 700;
-  color: var(--forest);
+  font-family: var(--display);
+  font-weight: 600;
+  color: var(--text);
   margin-top: 0.9rem;
   padding-left: 0.8rem;
-  border-left: 3px solid var(--grass);
+  border-left: 3px solid var(--signal);
 }
-
-.skills dt:first-child {
+.skills dt:first-of-type {
   margin-top: 0;
 }
-
 .skills dd {
   margin: 0.15rem 0 0;
   padding-left: 0.8rem;
+  color: var(--muted);
 }
 
 /* ============================================================
-   CONTACT / FOOTER — full-bleed autumn forest, matte-black scrim
+   FOOTER — low-intensity horizon + static moon arc
    ============================================================ */
-
 .site-footer {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  margin-top: 2.5rem;
-  color: var(--on-dark);
-  background: var(--ink);
+  margin-top: 3rem;
+  color: var(--text);
+  background: var(--bg);
+  border-top: 1px solid var(--line);
 }
-
-.site-footer__bg,
-.site-footer__bg img {
+.site-footer__scene {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
-
-.site-footer__bg img {
-  object-fit: cover;
-  object-position: center 40%;
-  display: block;
-}
-
-/* top-fade from parchment into the dark forest for a smooth hand-off,
-   plus an overall matte-black wash to hold text contrast over the photo */
-.site-footer__scrim {
+.footer-horizon {
   position: absolute;
   inset: 0;
-  z-index: -1;
   background: linear-gradient(
-      to bottom,
-      var(--parchment) 0%,
-      rgba(16, 17, 11, 0.72) 16%,
-      rgba(16, 17, 11, 0.6) 55%,
-      rgba(15, 17, 11, 0.82) 100%
-    );
+    to bottom,
+    rgba(255, 138, 120, 0.1) 0%,
+    rgba(110, 86, 207, 0.1) 34%,
+    rgba(8, 8, 27, 0) 70%
+  );
 }
-
+/* small static moon arc peeking from the bottom-right */
+.footer-moon {
+  position: absolute;
+  right: 8%;
+  bottom: -70px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 42% 38%,
+    rgba(247, 215, 181, 0.5),
+    rgba(236, 197, 157, 0.28) 60%,
+    transparent 78%
+  );
+}
 .site-footer__inner {
-  padding-top: 3.4rem;
+  position: relative;
+  z-index: 1;
+  padding-top: 3rem;
   padding-bottom: 2.6rem;
 }
-
 .site-footer h2 {
-  color: var(--on-dark);
+  color: var(--text);
 }
-
-.site-footer h2::after {
-  background: var(--amber);
+.footer-closing {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--lavender);
+  margin: 1rem 0 0;
 }
-
-.site-footer a {
-  color: var(--on-dark);
-  text-decoration-color: var(--amber);
-}
-
-.site-footer a:hover {
-  color: #fff;
-}
-
-.site-footer a:focus-visible {
-  outline: 2px solid var(--amber);
-}
-
 .colophon {
   margin: 1.8rem 0 0;
   padding-top: 1.1rem;
-  border-top: 1px solid rgba(240, 234, 216, 0.18);
-  color: var(--on-dark-muted);
-  font-size: 0.95rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.82rem;
 }
 
-/* ---- small screens ------------------------------------------- */
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+/* tablet */
+@media (max-width: 1024px) {
+  .moon,
+  .moon-glow {
+    left: 74%;
+  }
+  .moon {
+    width: clamp(300px, 42vw, 520px);
+  }
+}
 
-@media (max-width: 700px) {
-  /* On narrow viewports the subject can crowd the text column, so the scrim
-     goes near-uniform (top-to-bottom) to guarantee AA contrast for the name,
-     and the crop leans right to keep the hazy sky behind the copy. */
+/* stack: copy above portrait */
+@media (max-width: 760px) {
   .hero {
-    min-height: min(88vh, 560px);
-    align-items: center;
+    min-height: 94svh;
+    padding-top: 4.5rem;
   }
-
-  .hero__bg img {
-    object-position: 78% 26%;
+  .hero__grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
-
-  .hero__scrim {
-    background: linear-gradient(
-        105deg,
-        rgba(16, 17, 11, 0.9) 0%,
-        rgba(16, 17, 11, 0.72) 55%,
-        rgba(16, 17, 11, 0.5) 100%
-      ),
-      linear-gradient(
-        to bottom,
-        rgba(16, 17, 11, 0.35) 0%,
-        rgba(16, 17, 11, 0.2) 60%,
-        var(--parchment) 100%
-      );
+  .hero__portrait {
+    order: 2;
+    max-width: 320px;
   }
-}
-
-@media (max-width: 38rem) {
-  h1 {
-    font-size: 2rem;
+  .hero h1 {
+    font-size: clamp(2.6rem, 12vw, 3.6rem);
   }
-
-  h2 {
-    font-size: 1.35rem;
+  .moon,
+  .moon-glow {
+    left: 62%;
+    top: 62%;
+    width: 75vw;
   }
-
-  .hero .tagline {
-    font-size: 1.25rem;
+  .moon-glow {
+    width: 92vw;
   }
-
+  .terrain {
+    height: 18svh;
+  }
+  .topnav__inner {
+    padding: 0.7rem 0.85rem;
+  }
+  .topnav__brand {
+    font-size: 0.88rem;
+  }
+  .topnav__links {
+    display: none; /* single-page mobile: brand only; hero carries Email/GitHub/CV */
+  }
   .project {
     flex-direction: column;
     gap: 0.9rem;
     padding: 1.1rem;
   }
-
   .project .thumb {
     flex-basis: auto;
     width: 100%;
     max-width: 20rem;
   }
-
   .timeline li {
     flex-direction: column;
     gap: 0;
     padding: 0.5rem 0 0.5rem 1rem;
   }
-
-  /* the flex-basis becomes vertical height once the row stacks — reset it
-     so dates sit flush above their entries */
   .timeline .when {
     flex: none;
   }
 }
 
+/* below 480px: thin the ambient particle field ~40% */
+@media (max-width: 480px) {
+  .pcl--dense {
+    display: none;
+  }
+  h2 {
+    font-size: 1.45rem;
+  }
+}
+
 /* ============================================================
-   FALLING-LEAVES LAYER — fixed, decorative, non-interactive
-   Sits above the background bands + content but never receives
-   pointer events; leaves are drawn subtle/low-opacity so body and
-   hero text keep their AA contrast. Painted by assets/leaves.js.
+   MOTION — gated behind html.js-anim (set by JS only when motion
+   is allowed). No JS and reduced motion => complete static scene.
    ============================================================ */
+html.js-anim .sky {
+  opacity: 0;
+  animation: sky-in 0.9s var(--ease-out) forwards;
+}
+html.js-anim .moon,
+html.js-anim .moon-glow {
+  opacity: 0;
+  transform: translate(-50%, calc(-50% + 48px)) scale(0.96);
+  animation: moon-rise 1.45s var(--ease-out) 0.15s forwards;
+}
+html.js-anim .terrain {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: terrain-in 0.9s var(--ease-out) 0.35s forwards;
+}
+html.js-anim .eyebrow,
+html.js-anim .hero h1,
+html.js-anim .hero .tagline,
+html.js-anim .hero .subline,
+html.js-anim .hero__actions {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: copy-in 0.7s var(--ease-out) forwards;
+}
+html.js-anim .eyebrow {
+  animation-delay: 0.6s;
+}
+html.js-anim .hero h1,
+html.js-anim .hero .tagline {
+  animation-delay: 0.69s;
+}
+html.js-anim .hero .subline,
+html.js-anim .hero__actions {
+  animation-delay: 0.78s;
+}
+html.js-anim .hero__portrait {
+  opacity: 0;
+  transform: translateX(18px);
+  animation: portrait-in 1.2s var(--ease-out) 1.2s forwards;
+}
+/* constellation: draw paths left-to-right, nodes fade in as paths finish */
+html.js-anim .con-paths path {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: draw 1.3s var(--ease-out) forwards;
+}
+html.js-anim .con-paths path:nth-child(1) { animation-delay: 0.9s; }
+html.js-anim .con-paths path:nth-child(2) { animation-delay: 1.05s; }
+html.js-anim .con-paths path:nth-child(3) { animation-delay: 1.2s; }
+html.js-anim .con-paths path:nth-child(4) { animation-delay: 1.35s; }
+html.js-anim .con-paths path:nth-child(5) { animation-delay: 1.5s; }
+html.js-anim .con-paths path:nth-child(6) { animation-delay: 1.65s; }
+html.js-anim .con-paths path:nth-child(7) { animation-delay: 1.8s; }
+html.js-anim .con-paths path:nth-child(8) { animation-delay: 1.95s; }
+html.js-anim .con-nodes circle {
+  opacity: 0;
+  animation: node-in 0.5s ease forwards;
+}
+html.js-anim .con-nodes circle:nth-child(n) { animation-delay: 1.6s; }
 
-#leaf-layer {
-  position: fixed;
-  inset: 0;
-  z-index: 4; /* above hero/footer photos + parchment content, purely visual */
-  pointer-events: none; /* never blocks clicks, selection, or scrolling */
+/* ambient: particle drift + node breathing */
+html.js-anim .pcl {
+  animation: drift var(--dur, 20s) ease-in-out var(--del, 0s) infinite alternate;
+}
+html.js-anim .con-nodes circle:nth-child(2),
+html.js-anim .con-nodes circle:nth-child(5) {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: breathe 4.5s ease-in-out 2.4s infinite;
 }
 
-#leaf-layer canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+/* suspend ambient motion when tab hidden */
+html.is-hidden .pcl,
+html.is-hidden .con-nodes circle {
+  animation-play-state: paused !important;
 }
 
-/* ---- motion / accessibility --------------------------------- */
+/* optional pointer parallax (JS sets --px/--py; coarse pointers excluded) */
+html.js-anim .moon,
+html.js-anim .moon-glow {
+  --px: 0px;
+  --py: 0px;
+}
 
+@keyframes sky-in {
+  to { opacity: 1; }
+}
+@keyframes moon-rise {
+  to {
+    opacity: 1;
+    transform: translate(calc(-50% + var(--px, 0px)), calc(-50% + var(--py, 0px)))
+      scale(1);
+  }
+}
+@keyframes terrain-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes copy-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes portrait-in {
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes node-in {
+  to { opacity: 1; }
+}
+@keyframes drift {
+  from { transform: translate(0, 0) rotate(0deg); }
+  to { transform: translate(var(--dx, 20px), var(--dy, -16px)) rotate(var(--r, 12deg)); }
+}
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+}
+
+/* ---- reduced motion: complete static scene ------------------ */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-
-  * {
-    transition: none !important;
+  *,
+  *::before,
+  *::after {
     animation: none !important;
-  }
-
-  /* No falling leaves for readers who asked for reduced motion.
-     leaves.js also bails out of its rAF loop under this query — the
-     display:none is a belt-and-braces guard so nothing paints. */
-  #leaf-layer {
-    display: none !important;
+    transition: none !important;
   }
 }
