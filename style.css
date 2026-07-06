@@ -742,6 +742,16 @@ a:hover {
   color: var(--lavender);
   border-left-color: var(--signal);
 }
+.skills dt.sk-stats {
+  /* cyan, matching the Statistics chip label */
+  color: var(--data);
+  border-left-color: var(--data);
+}
+.skills dt.sk-eng {
+  /* moon/yellow, matching the Engineering chip label */
+  color: var(--moon);
+  border-left-color: var(--moon);
+}
 .skills dd {
   margin: 0.15rem 0 0;
   padding-left: 0.8rem;
