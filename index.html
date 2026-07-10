@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Amit Aminov — Machine learning for formal reasoning</title>
-  <meta name="description" content="Amit Aminov: physicist by training, operations researcher by profession, ML researcher by obsession. Machine learning for formal reasoning — fine-tuning LLMs to prove theorems in Lean.">
+  <title>Amit Aminov — Data Scientist / ML Researcher</title>
+  <meta name="description" content="Amit Aminov — data scientist and ML researcher building trustworthy AI systems: machine learning, statistical modeling, LLM evaluation, and formal reasoning (theorem proving in Lean 4).">
   <link rel="preload" href="assets/fonts/spacegrotesk-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -19,6 +19,7 @@
       <li><a href="#about" data-navlink>About</a></li>
       <li><a href="#projects" data-navlink>Projects</a></li>
       <li><a href="#research" data-navlink>Research</a></li>
+      <li><a href="#skills" data-navlink>Skills</a></li>
       <li><a href="#contact" data-navlink>Contact</a></li>
     </ul>
   </div>
@@ -30,14 +31,18 @@
   <!-- LEFT copy + RIGHT portrait: meaningful content, before decorative scene -->
   <div class="hero__grid">
     <div class="hero__copy">
-      <p class="eyebrow">AI / DATA / FORMAL REASONING</p>
+      <p class="eyebrow">DATA SCIENTIST &middot; ML RESEARCHER</p>
       <h1>Amit Aminov</h1>
-      <p class="tagline">Machine learning for formal reasoning.</p>
-      <p class="subline">Physicist by training, operations researcher by profession, ML researcher by obsession.</p>
+      <p class="tagline">Building trustworthy AI systems.</p>
+      <p class="subline">Machine learning, statistical modeling, LLM evaluation, and formal reasoning &mdash; with a focus on systems whose results can be trusted.</p>
       <div class="hero__actions">
-        <a class="btn btn--primary" href="mailto:amit.aminov@mail.huji.ac.il">Email</a>
-        <a class="btn" href="https://github.com/amitaminov">GitHub</a>
-        <a class="btn" href="cv/amit-aminov-cv.pdf">CV</a>
+        <a class="btn btn--primary" href="cv/amit-aminov-cv.pdf" download>Download CV</a>
+        <a class="btn" href="#projects">Selected projects</a>
+        <a class="btn" href="https://github.com/amitaminov" rel="me">GitHub</a>
+        <a class="btn" href="mailto:amit.aminov@mail.huji.ac.il">Email</a>
+        <!-- TODO(LinkedIn): add a LinkedIn CTA here once Amit provides an exact
+             profile URL, e.g. <a class="btn" href="https://www.linkedin.com/in/USERNAME" rel="me">LinkedIn</a>.
+             No verified profile URL is on file — do NOT publish a guessed handle. -->
       </div>
     </div>
 
@@ -168,17 +173,19 @@
       <div class="section-divider" data-motif="arc" aria-hidden="true"></div>
       <h2 id="bio-h">About</h2>
       <p>
-        I started in physics (B.Sc. through Bar-Ilan&rsquo;s program for youth
-        gifted in mathematics) because I wanted models that stay accountable to
-        reality rather than to a leaderboard. That instinct carried into
-        military operations research &mdash; first leading an Operations Research
-        and Data Science team in Unit&nbsp;8200, then in the IAF&rsquo;s
-        Operations Research Branch, work recognized with the Israel Defense
-        Prize. In my research M.Sc. at the Hebrew University it has become a
-        single habit: not trusting a number until the way it was produced has
-        earned it. Today that means machine learning for formal reasoning
-        &mdash; fine-tuning LLMs to prove theorems in Lean, where a verifier,
-        not a leaderboard, decides what counts.
+        I&rsquo;m a data scientist and ML researcher with a physics foundation
+        (B.Sc. through Bar-Ilan&rsquo;s program for youth gifted in mathematics)
+        and years of applied quantitative work. I led an Operations Research and
+        Data Science team in Unit&nbsp;8200 &mdash; hiring, mentoring, and
+        shipping end-to-end ML pipelines &mdash; then built statistical models
+        in the IAF&rsquo;s Operations Research Branch, work recognized with the
+        Israel Defense Prize. In my research M.Sc. at the Hebrew University I
+        work on machine learning for formal reasoning: fine-tuning LLMs to prove
+        theorems in Lean&nbsp;4, where a verifier, not a leaderboard, decides
+        what counts. Across all of it I build ML systems with careful
+        evaluation, reproducible experiments, and statistically grounded
+        analysis &mdash; I try not to trust a number until I understand how it
+        was produced.
       </p>
 
       <ul class="timeline">
@@ -219,8 +226,17 @@
           </div>
           <div class="desc">
             <!-- Repo not yet public — relink at publish: https://github.com/amitaminov/generated-formal-theorem-proofs -->
-            <h3>Generated Formal Theorem Proofs in LEAN</h3>
-            <p>How much of an automated prover&rsquo;s success is reasoning about the goal, and how much is just favoring tactics common in the training corpus? A goal-blind sampler that only replays Mathlib4&rsquo;s tactic frequencies &mdash; never reading the statement or proof state &mdash; already clears about a quarter of miniF2F at a shared small search budget, a floor neural provers are almost never measured against.</p>
+            <h3>Generated Formal Theorem Proofs in Lean</h3>
+            <p class="summary">Goal-blind baselines that measure how much of a neural theorem prover&rsquo;s success is reasoning versus corpus tactic frequency.</p>
+            <dl class="pmr">
+              <dt>Problem</dt>
+              <dd>Neural provers are rarely compared against a simple baseline, so it&rsquo;s unclear how much of their success comes from reasoning about the goal versus favoring tactics common in the training corpus.</dd>
+              <dt>Method</dt>
+              <dd>A goal-blind sampler that replays only Mathlib4 tactic frequencies &mdash; never reading the statement or proof state &mdash; run under the same best-first search budget as the neural prover.</dd>
+              <dt>Result</dt>
+              <dd>A 16,850-parameter frequency table clears 26.2% of miniF2F-test (64/244) versus 49.6% for a ~7B neural prover at the same budget &mdash; roughly half the prover&rsquo;s rate from a floor it is almost never measured against.</dd>
+            </dl>
+            <p class="stack"><span class="stack-label">Stack</span> Python &middot; Lean&nbsp;4 &middot; Mathlib &middot; PyTorch &middot; best-first search</p>
             <ul class="chips" aria-label="Project categories">
               <li class="chip llm">LLMs</li>
               <li class="chip stats">Statistics</li>
@@ -238,7 +254,16 @@
           <div class="desc">
             <!-- Repo not yet public — relink at publish: https://github.com/amitaminov/ai-ds-ml-dl-researcher -->
             <h3>Agentic Research Advisor</h3>
-            <p>Autonomous coding agents will narrate success they never achieved, so the hard part of running them unattended is accountability, not capability. This harness treats artifacts on disk as the only source of truth, scoring what a run actually produced rather than what the agent claims &mdash; so incomplete runs and honest negative results become first-class outcomes instead of quietly fabricated agreement.</p>
+            <p class="summary">An autonomous agent that reproduces ML papers and is graded on the artifacts it leaves on disk, not on what it claims.</p>
+            <dl class="pmr">
+              <dt>Problem</dt>
+              <dd>Autonomous coding agents will narrate success they never achieved, so running them unattended is a problem of accountability, not capability.</dd>
+              <dt>Method</dt>
+              <dd>A harness that treats on-disk artifacts as the only source of truth, scoring what each run actually produced rather than the agent&rsquo;s self-report &mdash; so incomplete runs and honest negatives become first-class outcomes.</dd>
+              <dt>Result</dt>
+              <dd>A searchable reproduction dashboard; as of July&nbsp;2026, 41 papers ingested and 14 reproduced with full / partial / minimal verdicts backed by per-paper figures and tests.</dd>
+            </dl>
+            <p class="stack"><span class="stack-label">Stack</span> Python &middot; LLM agents &middot; pytest &middot; static dashboard</p>
             <ul class="chips" aria-label="Project categories">
               <li class="chip llm">LLMs</li>
               <li class="chip eng">Engineering</li>
@@ -256,7 +281,16 @@
           <div class="desc">
             <!-- Repo not yet public — relink at publish: https://github.com/amitaminov/gaussian-geometry -->
             <h3>Gaussian Geometry</h3>
-            <p>Covariance is the most-taught, least-understood object in data science, and its geometry hides traps practitioners repeat. This turns three into exact, unit-tested statements: rotating a Gaussian and constructing its covariance are the same operation; the principal-axis orientation becomes pure noise as the variances equalize; and the familiar &ldquo;one-sigma&rdquo; ellipse holds only about 39% of the mass in 2D, not the 68% carried over from one dimension. Closed forms in place of eyeball and Monte-Carlo intuition.</p>
+            <p class="summary">Turns three widely-taught covariance &ldquo;facts&rdquo; into exact, unit-tested statements.</p>
+            <dl class="pmr">
+              <dt>Problem</dt>
+              <dd>Covariance is the most-taught, least-understood object in data science, and its geometry hides traps practitioners repeat.</dd>
+              <dt>Method</dt>
+              <dd>Closed-form derivations backed by unit tests and animation, in place of eyeball and Monte-Carlo intuition.</dd>
+              <dt>Result</dt>
+              <dd>Rotating a Gaussian and constructing its covariance are the same operation; principal-axis orientation becomes pure noise as the variances equalize; and the &ldquo;one-sigma&rdquo; ellipse holds only ~39% of the mass in 2D, not the 68% carried over from one dimension.</dd>
+            </dl>
+            <p class="stack"><span class="stack-label">Stack</span> Python &middot; NumPy &middot; Plotly &middot; unit-tested derivations</p>
             <ul class="chips" aria-label="Project categories">
               <li class="chip stats">Statistics</li>
             </ul>
@@ -273,7 +307,16 @@
           <div class="desc">
             <!-- Repo not yet public — relink at publish: https://github.com/amitaminov/decision-boundary-atlas -->
             <h3>Decision Boundary Atlas</h3>
-            <p>Overfitting is usually argued from the gap between two accuracy curves; here it becomes physically visible as the geometry of an SVM&rsquo;s decision boundary. With the boundary first confirmed two independent ways as a consistency check, a single kernel-width sweep shows added flexibility stretching and fragmenting it into hundreds of isolated islands exactly as test accuracy turns over &mdash; boundary complexity as an early warning for memorization when validation labels are scarce.</p>
+            <p class="summary">Makes SVM overfitting physically visible as the geometry of a decision boundary.</p>
+            <dl class="pmr">
+              <dt>Problem</dt>
+              <dd>Overfitting is usually argued from the gap between two accuracy curves &mdash; hard to see, and easy to miss when validation labels are scarce.</dd>
+              <dt>Method</dt>
+              <dd>A single RBF-SVM kernel-width sweep in 2D PCA space, with the boundary first confirmed two independent ways as a consistency check.</dd>
+              <dt>Result</dt>
+              <dd>Added flexibility stretches and fragments the boundary into hundreds of isolated islands exactly as test accuracy turns over &mdash; boundary complexity as an early warning for memorization.</dd>
+            </dl>
+            <p class="stack"><span class="stack-label">Stack</span> Python &middot; scikit-learn &middot; PCA &middot; Matplotlib</p>
             <ul class="chips" aria-label="Project categories">
               <li class="chip mlearn">Machine Learning</li>
               <li class="chip stats">Statistics</li>
@@ -291,7 +334,16 @@
           <div class="desc">
             <!-- Repo not yet public — relink at publish: https://github.com/amitaminov/technical-interviewer -->
             <h3>Technical Interviewer</h3>
-            <p>Resilience as a design principle: every external dependency is optional and every failure has a working fallback, so a voice-driven, lip-synced 3D mock interviewer still runs &mdash; and stays deterministically testable &mdash; with no API key or network at all. The same discipline extends to safety, where any fetched web content is treated as untrusted data that can be graded or rejected but never obeyed.</p>
+            <p class="summary">A voice-driven, lip-synced mock interviewer that still runs &mdash; and stays testable &mdash; with no API key or network at all.</p>
+            <dl class="pmr">
+              <dt>Problem</dt>
+              <dd>External dependencies make interactive AI apps fragile and hard to test deterministically.</dd>
+              <dt>Method</dt>
+              <dd>Every external dependency is optional with a working fallback; any fetched web content is treated as untrusted data that can be graded or rejected, never obeyed.</dd>
+              <dt>Result</dt>
+              <dd>A resilient, prompt-injection-aware system that runs fully offline and stays deterministically testable end to end.</dd>
+            </dl>
+            <p class="stack"><span class="stack-label">Stack</span> FastAPI &middot; React &middot; FAISS + MiniLM RAG &middot; pytest</p>
             <ul class="chips" aria-label="Project categories">
               <li class="chip eng">Engineering</li>
             </ul>
@@ -308,7 +360,16 @@
           <div class="desc">
             <!-- Repo not yet public — relink at publish: https://github.com/amitaminov/tripwise -->
             <h3>TripWise</h3>
-            <p>Shared decisions are distorted by anchoring: the first partner to voice a preference biases the other. TripWise reframes couples&rsquo; trip planning as a decision-integrity problem, letting each partner rate options blind and revealing both sets only once everyone has rated everything &mdash; and because that rule lives in a Postgres row-level-security policy and trigger rather than the UI, no client or future frontend can peek early.</p>
+            <p class="summary">Reframes couples&rsquo; trip planning as a decision-integrity problem so the first opinion can&rsquo;t anchor the second.</p>
+            <dl class="pmr">
+              <dt>Problem</dt>
+              <dd>Shared decisions are distorted by anchoring: the first partner to voice a preference biases the other.</dd>
+              <dt>Method</dt>
+              <dd>Each partner rates options blind; both sets reveal only once everyone has rated everything &mdash; and the rule lives in a Postgres row-level-security policy and trigger, not the UI.</dd>
+              <dt>Result</dt>
+              <dd>No client or future frontend can peek early, because the integrity invariant is enforced in the database rather than the interface.</dd>
+            </dl>
+            <p class="stack"><span class="stack-label">Stack</span> Next.js &middot; TypeScript &middot; Postgres (row-level security)</p>
             <ul class="chips" aria-label="Project categories">
               <li class="chip eng">Engineering</li>
             </ul>
@@ -331,7 +392,16 @@
           <div class="desc">
             <!-- Repo not yet public — relink at publish: https://github.com/amitaminov/room-occupancy -->
             <h3>Room Occupancy</h3>
-            <p>Random train/test splits can manufacture skill out of time. With sensor readings taken every 30&nbsp;seconds or so, a shuffled split drops a near-duplicate of almost every test row into training and inflates the score by tens of macro-F1 points. Evaluated the honest way &mdash; trained on the past and tested on a genuinely later window &mdash; the problem is far harder and shaped by drift between sessions, where a simple generative model (QDA, macro-F1 about 0.77) transfers while tuned tree ensembles built on absolute thresholds do not.</p>
+            <p class="summary">Shows how a random train/test split manufactures skill out of time on sensor data.</p>
+            <dl class="pmr">
+              <dt>Problem</dt>
+              <dd>With sensor readings taken every ~30&nbsp;seconds, a shuffled split drops a near-duplicate of almost every test row into training and inflates the score by tens of macro-F1 points.</dd>
+              <dt>Method</dt>
+              <dd>Compared the shuffled split against an honest chronological holdout &mdash; trained on the past, tested on a genuinely later window.</dd>
+              <dt>Result</dt>
+              <dd>Evaluated honestly the task is far harder and shaped by drift between sessions: a simple generative model (QDA, macro-F1 ~0.77) transfers, while tuned tree ensembles built on absolute thresholds do not.</dd>
+            </dl>
+            <p class="stack"><span class="stack-label">Stack</span> Python &middot; scikit-learn &middot; QDA &middot; signal processing</p>
             <p class="sublink"><a href="https://amitaminov.github.io/Room-Occupancy-Machine-Learning-Estimation/Room_Occupancy/data/Room%20Occupancy%20Signal%20Dashboard.html">Interactive dashboard &rarr;</a>&nbsp;&middot;&nbsp;<a href="https://ieeexplore.ieee.org/document/8644432">Original paper (IEEE) &rarr;</a>&nbsp;&middot;&nbsp;<a href="https://www.linkedin.com/feed/update/urn:li:activity:7453811180009136128/">LinkedIn write-up &rarr;</a></p>
             <ul class="chips" aria-label="Project categories">
               <li class="chip stats">Statistics</li>
@@ -348,41 +418,42 @@
       <div class="section-divider" data-motif="horizon" aria-hidden="true"></div>
       <h2 id="research-h">Research focus</h2>
       <p>
-        The through-line across these projects is a refusal to accept a number
-        until the way it was produced has earned trust. It shows up as
-        chronological splits instead of shuffled ones, frequency-table
-        baselines instead of only model-versus-model comparisons,
-        artifact-scored reproductions instead of agent self-reports, and closed
-        forms in place of Monte-Carlo intuition. The same instinct reappears as
-        system design &mdash; invariants placed where they cannot be bypassed
-        &mdash; and, ultimately, as proofs checked by a verifier.
+        My research is on machine learning for formal reasoning. I fine-tune
+        LLMs to prove theorems in Lean&nbsp;4 using GRPO, with the Lean verifier
+        itself supplying the reward: a proof either checks or it doesn&rsquo;t,
+        so the model cannot be rewarded for sounding right. Training runs on a
+        university GPU cluster against Mathlib-scale tactic data, measured
+        against the goal-blind frequency baselines from Generated Formal Theorem
+        Proofs that any learned policy has to beat at a shared search budget.
       </p>
       <p>
-        My current work fine-tunes LLMs for theorem proving in Lean&nbsp;4
-        using GRPO, with the Lean verifier itself supplying the reward
-        signal: a proof either checks or it doesn&rsquo;t, so the model cannot
-        be rewarded for sounding right. Training runs on a university GPU
-        cluster against Mathlib-scale tactic data, with the goal-blind
-        frequency baselines from Generated Formal Theorem Proofs as the floor
-        any learned policy has to clear at a shared search budget. The aim is a
-        prover whose reported gains survive the same skepticism the rest of this
-        page applies to everything else.
+        The same discipline runs through the rest of my work: chronological
+        splits instead of shuffled ones, frequency-table baselines instead of
+        only model-versus-model comparisons, artifact-scored reproductions
+        instead of agent self-reports, and closed forms in place of Monte-Carlo
+        intuition. It also shows up as system design &mdash; invariants placed
+        where they cannot be bypassed. The goal throughout is evaluation you can
+        trust and systems whose results hold up under scrutiny.
       </p>
     </section>
 
     <!-- ================= SKILLS ================= -->
-    <section class="skills" aria-labelledby="skills-h">
+    <section class="skills" id="skills" aria-labelledby="skills-h">
       <div class="section-divider" data-motif="arc" aria-hidden="true"></div>
       <h2 id="skills-h">Skills</h2>
       <dl>
-        <dt class="sk-ml">Machine Learning</dt>
-        <dd>Deep learning, reinforcement learning, gradient boosting, anomaly detection, unsupervised learning; PyTorch, TensorFlow, scikit-learn, XGBoost, SHAP</dd>
-        <dt class="sk-llm">LLMs</dt>
-        <dd>PyTorch, Hugging Face, LLM fine-tuning (LoRA, GRPO), RL with verifier rewards, Lean&nbsp;4 / Mathlib, evaluation and baseline design</dd>
-        <dt class="sk-stats">Statistics &amp; Operations Research</dt>
-        <dd>Statistical modeling, experimental design, honest evaluation splits, simulation, optimization, resource-allocation modeling</dd>
-        <dt class="sk-eng">Engineering</dt>
-        <dd>Python, SQL, Oracle Client, MongoDB, pytest, Git, Linux and HPC clusters (Slurm), graceful degradation architecture</dd>
+        <dt class="sk-ml">Machine Learning &amp; Data Science</dt>
+        <dd>Deep learning, reinforcement learning, gradient boosting, anomaly detection, unsupervised learning, feature engineering; PyTorch, TensorFlow, scikit-learn, XGBoost, SHAP</dd>
+        <dt class="sk-llm">LLMs &amp; Evaluation</dt>
+        <dd>LLM fine-tuning (LoRA, GRPO), RL with verifier rewards, agentic and tool-use pipelines, Hugging Face, benchmark and baseline design, honest-evaluation methodology</dd>
+        <dt class="sk-stats">Statistics &amp; Optimization</dt>
+        <dd>Statistical modeling, experimental design, honest evaluation splits, uncertainty and simulation, mathematical optimization, resource-allocation / operations-research modeling</dd>
+        <dt class="sk-formal">Formal Methods &amp; Lean</dt>
+        <dd>Lean&nbsp;4, Mathlib, best-first proof search, verifier-based reward design, theorem-proving evaluation</dd>
+        <dt class="sk-eng">Engineering &amp; Tooling</dt>
+        <dd>Python, pytest, Git, Linux, HPC clusters (Slurm), FastAPI, reproducible pipelines, graceful degradation architecture</dd>
+        <dt class="sk-data">Data &amp; Infrastructure</dt>
+        <dd>SQL, Oracle Client, MongoDB, Postgres (row-level security), GPU-cluster training, dashboards</dd>
       </dl>
     </section>
 
