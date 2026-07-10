@@ -325,22 +325,22 @@
         <!-- ---- Technical Interviewer ---- -->
         <li class="project">
           <div class="thumb">
-            <img src="figures/technical-interviewer.png"
-                 alt="Screenshot: interview setup screen with target role, interview mode, difficulty, duration, language, and hint-policy controls for a voice-driven mock interview."
-                 width="1440" height="900">
+            <img src="figures/interviewer-demo-en.gif"
+                 alt="Animation: a bilingual AI mock interview. A female AI interviewer poses a technical question about profiling a pandas pipeline for bottlenecks; a separate male AI candidate, grounded in a CV, answers correctly. Lip-synced, voice-driven, English and Hebrew."
+                 width="640" height="360">
           </div>
           <div class="desc">
             <h3>Technical Interviewer</h3>
-            <p class="summary">A voice-driven, lip-synced mock interviewer that still runs &mdash; and stays testable &mdash; with no API key or network at all.</p>
+            <p class="summary">A bilingual (English/Hebrew) voice mock interview where both sides are AI &mdash; a lip-synced interviewer and a CV-grounded candidate &mdash; with real-time barge-in, and it still runs offline with no API key.</p>
             <dl class="pmr">
               <dt>Problem</dt>
-              <dd>External dependencies make interactive AI apps fragile and hard to test deterministically.</dd>
+              <dd>Interactive voice-AI apps are fragile: they die with the network, can&rsquo;t be tested deterministically, and can be steered off-script by prompt injection.</dd>
               <dt>Method</dt>
-              <dd>Every external dependency is optional with a working fallback; any fetched web content is treated as untrusted data that can be graded or rejected, never obeyed.</dd>
+              <dd>Both interviewer and candidate are AI (candidate answers grounded in a Gemini model plus the CV); speech supports real-time barge-in in EN and HE; every external dependency degrades gracefully to a deterministic offline engine, and fetched content is treated as untrusted data, never obeyed.</dd>
               <dt>Result</dt>
-              <dd>A resilient, prompt-injection-aware system that runs fully offline and stays deterministically testable end to end.</dd>
+              <dd>A resilient, prompt-injection-aware bilingual interview that runs fully offline and stays deterministically testable end to end.</dd>
             </dl>
-            <p class="stack"><span class="stack-label">Stack</span> FastAPI &middot; React &middot; FAISS + MiniLM RAG &middot; pytest</p>
+            <p class="stack"><span class="stack-label">Stack</span> FastAPI &middot; React &middot; Gemini &middot; FAISS + MiniLM RAG &middot; pytest</p>
             <p class="sublink"><a href="https://github.com/AmitAminov/technical-interviewer">Code on GitHub &rarr;</a></p>
             <ul class="chips" aria-label="Project categories">
               <li class="chip eng">Engineering</li>
