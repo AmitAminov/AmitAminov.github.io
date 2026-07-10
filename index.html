@@ -326,19 +326,19 @@
         <li class="project">
           <div class="thumb">
             <img src="figures/interviewer-demo-en.gif"
-                 alt="Animation: a bilingual AI mock interview. A female AI interviewer poses a technical question about profiling a pandas pipeline for bottlenecks; a separate male AI candidate, grounded in a CV, answers correctly. Lip-synced, voice-driven, English and Hebrew."
+                 alt="Animation: a Technical Interviewer mock session. A lip-synced interviewer poses a technical question about profiling a pandas pipeline for bottlenecks; the candidate answers and the answer is scored on the rubric. Voice-driven, English and Hebrew. (The candidate shown is an AI stand-in used for the demo.)"
                  width="640" height="360">
           </div>
           <div class="desc">
             <h3>Technical Interviewer</h3>
-            <p class="summary">A bilingual (English/Hebrew) voice mock interview where both sides are AI &mdash; a lip-synced interviewer and a CV-grounded candidate &mdash; with real-time barge-in, and it still runs offline with no API key.</p>
+            <p class="summary">An adaptive voice mock interview that trains you for the real thing &mdash; tailored to your target role and seniority, it asks role-planned questions, holds a real spoken back-and-forth, and does what real interviews never do: scores every answer and hands back a readiness report and study plan. Bilingual (EN/HE); runs fully offline with no API key.</p>
             <dl class="pmr">
               <dt>Problem</dt>
-              <dd>Interactive voice-AI apps are fragile: they die with the network, can&rsquo;t be tested deterministically, and can be steered off-script by prompt injection.</dd>
+              <dd>Real technical interviews are scarce and give no feedback: an average corporate opening draws ~250 applicants, ~4&ndash;6 are interviewed and one is hired (Glassdoor), and ~94% of candidates who want post-interview feedback never get any. There&rsquo;s nowhere realistic to rehearse a spoken, role-specific interview and learn from it.</dd>
               <dt>Method</dt>
-              <dd>Both interviewer and candidate are AI (candidate answers grounded in a Gemini model plus the CV); speech supports real-time barge-in in EN and HE; every external dependency degrades gracefully to a deterministic offline engine, and fetched content is treated as untrusted data, never obeyed.</dd>
+              <dd>A voice-driven mock interviewer tailored to role (Data Scientist / Algorithm Researcher / AI Engineer) and seniority (Junior &rarr; Staff/Lead): it plans role-specific questions, listens with real-time barge-in in EN and HE, asks follow-ups and hints, and scores every answer on an 8-metric rubric into a readiness report and cross-session study plan. Production-hardened &mdash; every dependency degrades to a deterministic offline engine and the loop resists prompt injection &mdash; so it runs fully offline with no API key.</dd>
               <dt>Result</dt>
-              <dd>A resilient, prompt-injection-aware bilingual interview that runs fully offline and stays deterministically testable end to end.</dd>
+              <dd>A role- and seniority-tailored mock interview that gives the rubric feedback and study plan real interviews never do &mdash; resilient, prompt-injection-aware, fully offline, and deterministically testable (221 tests).</dd>
             </dl>
             <p class="stack"><span class="stack-label">Stack</span> FastAPI &middot; React &middot; Gemini &middot; FAISS + MiniLM RAG &middot; pytest</p>
             <p class="sublink"><a href="https://github.com/AmitAminov/technical-interviewer">Code on GitHub &rarr;</a></p>
