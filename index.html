@@ -36,11 +36,11 @@
       <p class="tagline">Building trustworthy AI systems.</p>
       <p class="subline">Machine learning, statistical modeling, LLM evaluation, and formal reasoning &mdash; with a focus on systems whose results can be trusted.</p>
       <div class="hero__actions">
-        <a class="btn btn--primary" href="cv/amit-aminov-cv.pdf" download>Download CV</a>
+        <a class="btn btn--primary" href="cv/amit-aminov-cv.pdf" download>CV</a>
         <a class="btn" href="#projects">Selected projects</a>
         <a class="btn" href="https://github.com/amitaminov" rel="me">GitHub</a>
         <a class="btn" href="https://www.linkedin.com/in/amit-a-94a85822a" rel="me">LinkedIn</a>
-        <a class="btn" href="mailto:amit.aminov@mail.huji.ac.il">Email</a>
+        <a class="btn" id="js-copy-email" href="mailto:amit.aminov@mail.huji.ac.il" data-email="amit.aminov@mail.huji.ac.il" aria-label="Copy email address to clipboard">Email</a>
       </div>
     </div>
 
@@ -479,6 +479,9 @@
     <p class="colophon">Amit Aminov &middot; last updated July 2026</p>
   </div>
 </footer>
+
+<!-- clipboard toast (populated + shown by lunar-motion.js) -->
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 <script src="assets/lunar-motion.js" defer></script>
 

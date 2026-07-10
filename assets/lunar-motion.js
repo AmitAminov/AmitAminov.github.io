@@ -93,4 +93,62 @@
     );
   }
   enableParallax();
+
+  /* ---- Email button: copy to clipboard + toast --------------
+     Progressive enhancement: the anchor keeps its mailto: href, so
+     with no JS (or if the clipboard API is blocked) it still opens a
+     mail client. With JS, a click copies the address and shows a toast. */
+  var copyBtn = document.getElementById("js-copy-email");
+  var toast = document.getElementById("toast");
+  var toastTimer = null;
+
+  function showToast(email) {
+    if (!toast) return;
+    toast.innerHTML =
+      '<span class="toast-email"></span> mail copied to clipboard';
+    toast.querySelector(".toast-email").textContent = email;
+    toast.classList.add("is-visible");
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () {
+      toast.classList.remove("is-visible");
+    }, 2600);
+  }
+
+  function copyEmail(email) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(email);
+    }
+    return new Promise(function (resolve, reject) {
+      try {
+        var ta = document.createElement("textarea");
+        ta.value = email;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        resolve();
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+
+  if (copyBtn) {
+    copyBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      var email =
+        copyBtn.getAttribute("data-email") || "amit.aminov@mail.huji.ac.il";
+      copyEmail(email)
+        .then(function () {
+          showToast(email);
+        })
+        .catch(function () {
+          // clipboard unavailable — fall back to the mail client
+          window.location.href = "mailto:" + email;
+        });
+    });
+  }
 })();
