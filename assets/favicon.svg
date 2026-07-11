@@ -1,7 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
   <rect x="0.5" y="0.5" width="31" height="31" rx="7" fill="#0a0a20" stroke="#2a2350" stroke-width="1"/>
-  <!-- lattice cube — Amit's signature mark -->
-  <path d="M9 14 H23 V28 H9 Z" fill="none" stroke="#b9a7ff" stroke-width="1.5" stroke-linejoin="round"/>
-  <path d="M15 8 H29 V22 M9 14 L15 8 M23 14 L29 8 M23 28 L29 22" fill="none" stroke="#6e56cf" stroke-width="1.1" stroke-linejoin="round"/>
-  <circle cx="23" cy="14" r="1.8" fill="#78e7e7"/>
+  <!-- filled isometric cube — matches the cover-letter geo-mark -->
+  <g transform="translate(1,1.5) scale(0.74)">
+    <polygon points="20,4 34,12 20,20 6,12" fill="#b9a7ff" stroke="#ffffff" stroke-width="0.8" stroke-linejoin="round"/>
+    <polygon points="34,12 34,28 20,36 20,20" fill="#ff8a78" stroke="#ffffff" stroke-width="0.8" stroke-linejoin="round"/>
+    <polygon points="6,12 20,20 20,36 6,28" fill="#3aa8b0" stroke="#ffffff" stroke-width="0.8" stroke-linejoin="round"/>
+  </g>
 </svg>
