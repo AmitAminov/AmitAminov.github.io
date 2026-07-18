@@ -241,7 +241,7 @@
               <dt>Method</dt>
               <dd>A goal-blind sampler that replays only Mathlib4 tactic frequencies &mdash; never reading the statement or proof state &mdash; run under the same best-first search budget as the neural prover.</dd>
               <dt>Result</dt>
-              <dd>A 16,850-parameter frequency table clears 26.2% of miniF2F-test (64/244) versus 49.6% for a ~7B neural prover at the same budget &mdash; roughly half the prover&rsquo;s rate from a floor it is almost never measured against.</dd>
+              <dd>A 16,850-parameter frequency table clears 26.2% of miniF2F-test (64/244) versus 49.6% for a ~7B neural prover at the same budget &mdash; roughly half the prover&rsquo;s rate from a floor it is almost never measured against (in 2021, SOTA GPT-f produced 29% success rate, comparable to the baseline).</dd>
             </dl>
             <p class="stack"><span class="stack-label">Stack</span> Python &middot; Lean&nbsp;4 &middot; Mathlib &middot; PyTorch &middot; best-first search</p>
             <p class="sublink"><a href="https://github.com/AmitAminov/tactic-priors">Code &amp; methodology on GitHub &rarr;</a></p>
