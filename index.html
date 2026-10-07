@@ -222,29 +222,26 @@
       <h2 id="projects-h">Featured projects</h2>
       <ul class="projects">
 
-        <!-- ---- Generated Formal Theorem Proofs ---- -->
+        <!-- ---- Internal-State Probes for Kernel-Verified Theorem Proving ---- -->
         <li class="project">
           <div class="thumb">
-            <picture>
-              <source type="image/svg+xml" srcset="figures/fig2_headline_comparison.svg">
-              <img src="figures/fig2_headline_comparison.png"
-                   alt="Bar chart: a goal-blind frequency sampler proves 26.2% of miniF2F versus 49.6% for a 7B neural prover under the same search budget."
-                   width="2988" height="1466">
-            </picture>
+            <img src="figures/early_window_auroc.png"
+                 alt="Two line charts, 8B and 32B: MLP and LSTM probes predict proof failure with ROC-AUC rising from about 0.65 to 0.85 using only the first 250 to 4,000 generated tokens, while the tokens-so-far feature stays at chance."
+                 width="2057" height="737">
           </div>
           <div class="desc">
-            <h3>Generated Formal Theorem Proofs in Lean</h3>
-            <p class="summary">Goal-blind baselines that measure how much of a neural theorem prover&rsquo;s success is reasoning versus corpus tactic frequency.</p>
+            <h3>Internal-State Probes for Kernel-Verified Theorem Proving</h3>
+            <p class="summary">My M.Sc. thesis: small probes read a frozen prover&rsquo;s hidden states mid-proof and tell, early, which attempts will never close the goal.</p>
             <dl class="pmr">
               <dt>Problem</dt>
-              <dd>Neural provers are rarely compared against a simple baseline, so it&rsquo;s unclear how much of their success comes from reasoning about the goal versus favoring tactics common in the training corpus.</dd>
+              <dd>A prover samples many proofs per theorem and keeps whichever one Lean accepts, so most attempts are wasted &mdash; and the worst ones loop until the token cap, one of them re-emitting the same rewrite lemma 208 times. On the 8B model, 24.4% of failed attempts run longer than anything that ever verified, consuming 49.2% of all generated tokens.</dd>
               <dt>Method</dt>
-              <dd>A goal-blind sampler that replays only Mathlib4 tactic frequencies &mdash; never reading the statement or proof state &mdash; run under the same best-first search budget as the neural prover.</dd>
+              <dd>MLP and LSTM heads under 3M parameters read the frozen Goedel-Prover-V2&rsquo;s hidden state at each proof-line start and predict failure, then feed that probability back into generation. Labels come from a robust verification protocol: every proof recompiled in a fresh Lean process, accepted only if it type-checks with no &ldquo;sorry&rdquo; and rests on trusted kernel axioms alone.</dd>
               <dt>Result</dt>
-              <dd>A 16,850-parameter frequency table clears 26.2% of miniF2F-test (64/244) versus 49.6% for a ~7B neural prover at the same budget &mdash; roughly half the prover&rsquo;s rate from a floor it is almost never measured against (in 2021, SOTA GPT-f produced 29% success rate, comparable to the baseline).</dd>
+              <dd>The signal is real and early &mdash; ROC-AUC 0.89&ndash;0.92 in leakage-safe cross-validation, 0.81&ndash;0.86 out of domain, and 0.64&ndash;0.79 from only the first 250&ndash;4,000 generated tokens, where a token counter sits at chance. Steering generation on that signal is a reported negative result: 35 theorems solved versus the base 41 on 8B, 59 versus 60 on 32B. The same protocol reproduces Goedel-Prover-V2&rsquo;s published 32B score exactly (60=60), produces the first robustly verified 8B score (41), and catches a Lean-server-accepted proof of &ldquo;False&rdquo;.</dd>
             </dl>
-            <p class="stack"><span class="stack-label">Stack</span> Python &middot; Lean&nbsp;4 &middot; Mathlib &middot; PyTorch &middot; best-first search</p>
-            <p class="sublink"><a href="https://github.com/AmitAminov/tactic-priors">Code &amp; methodology on GitHub &rarr;</a></p>
+            <p class="stack"><span class="stack-label">Stack</span> Python &middot; PyTorch &middot; Lean&nbsp;4 &middot; Mathlib &middot; Goedel-Prover-V2 &middot; HPC&nbsp;/&nbsp;Slurm</p>
+            <p class="sublink"><a href="https://github.com/amitaminov-huji/Internal-State-Probes-for-Kernel-Verified-Theorem-Proving">Code &amp; thesis on GitHub &rarr;</a></p>
             <ul class="chips" aria-label="Project categories">
               <li class="chip llm">LLMs</li>
               <li class="chip stats">Statistics</li>
@@ -425,20 +422,22 @@
       <div class="section-divider" data-motif="horizon" aria-hidden="true"></div>
       <h2 id="research-h">Research focus</h2>
       <p>
-        My research is on machine learning for formal reasoning. I fine-tune
-        LLMs to prove theorems in Lean&nbsp;4 using GRPO, with the Lean verifier
-        itself supplying the reward: a proof either checks or it doesn&rsquo;t,
-        so the model cannot be rewarded for sounding right. Training runs on a
-        university GPU cluster against Mathlib-scale tactic data, measured
-        against the goal-blind frequency baselines from Generated Formal Theorem
-        Proofs that any learned policy has to beat at a shared search budget.
+        My research is on machine learning for formal reasoning. My M.Sc. thesis
+        asks whether a theorem prover knows, while it is still writing, that the
+        proof it is producing will fail &mdash; and whether that knowledge can be
+        fed back to steer generation. I train small probes, under three million
+        parameters, on the hidden states of a frozen Goedel-Prover-V2, and label
+        every attempt with Lean&rsquo;s own kernel verdict rather than a proof
+        server&rsquo;s reply: a proof either type-checks against the trusted
+        axioms or it doesn&rsquo;t, so nothing is credited for merely looking
+        finished. Training and evaluation run on a university GPU cluster.
       </p>
       <p>
         The same discipline runs through the rest of my work: chronological
-        splits instead of shuffled ones, frequency-table baselines instead of
-        only model-versus-model comparisons, artifact-scored reproductions
-        instead of agent self-reports, and closed forms in place of Monte-Carlo
-        intuition. It also shows up as system design &mdash; invariants placed
+        splits instead of shuffled ones, verifier-checked verdicts instead of a
+        scoring server&rsquo;s say-so, negative results reported as negative,
+        artifact-scored reproductions instead of agent self-reports, and closed
+        forms in place of Monte-Carlo intuition. It also shows up as system design &mdash; invariants placed
         where they cannot be bypassed. The goal throughout is evaluation you can
         trust and systems whose results hold up under scrutiny.
       </p>
