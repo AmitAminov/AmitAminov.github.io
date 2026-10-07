@@ -227,7 +227,7 @@
         <li class="project">
           <div class="thumb">
             <img src="figures/early_window_auroc.png"
-                 alt="Two line charts, 8B and 32B: MLP and LSTM probes predict proof failure with ROC-AUC rising from about 0.65 to 0.85 using only the first 250 to 4,000 generated tokens, while the tokens-so-far feature stays at chance within those early windows."
+                 alt="Two line charts, 8B and 32B: MLP and LSTM probes predict proof failure with ROC-AUC from about 0.64 to 0.79 using only the first 250 to 4,000 generated tokens, while the tokens-so-far feature stays at chance within those early windows."
                  width="2057" height="737">
           </div>
           <div class="desc">
@@ -239,7 +239,7 @@
               <dt>Method</dt>
               <dd>MLP and LSTM heads under 3M parameters read the frozen Goedel-Prover-V2&rsquo;s hidden state at each proof-line start and predict failure, then feed that probability back into generation. Labels come from a robust verification protocol: every proof recompiled in a fresh Lean process, accepted only if it type-checks with no &ldquo;sorry&rdquo; and rests on trusted kernel axioms alone.</dd>
               <dt>Result</dt>
-              <dd>The signal is real and early &mdash; ROC-AUC 0.89&ndash;0.92 in leakage-safe cross-validation, 0.81&ndash;0.86 out of domain, and 0.64&ndash;0.79 from only the first 250&ndash;4,000 generated tokens, where a token counter sits at chance. Steering generation on that signal is a reported negative result: 35 theorems solved versus the base 41 on 8B, 59 versus 60 on 32B. The same protocol reproduces Goedel-Prover-V2&rsquo;s published 32B score exactly (60=60), produces the first robustly verified 8B score (41), and catches a Lean-server-accepted proof of &ldquo;False&rdquo;.</dd>
+              <dd>The signal is real and early &mdash; ROC-AUC 0.89&ndash;0.92 in leakage-safe cross-validation, 0.81&ndash;0.86 out of domain, and 0.64&ndash;0.79 from only the first 250&ndash;4,000 generated tokens, where a token counter sits at chance. Steering generation on that signal is a reported negative result: 35 of 360 theorems solved versus the base&rsquo;s 41 on 8B, 59 versus 60 on 32B &mdash; neither difference significant (paired exact McNemar, p&nbsp;=&nbsp;0.109 and p&nbsp;=&nbsp;1.00), so the hypothesis is unsupported rather than steering shown to hurt. Single run; no confidence intervals. The same protocol reproduces Goedel-Prover-V2&rsquo;s published 32B pass@32 exactly (60=60), produces the first robustly verified 8B score I know of (41), and rejects a constructed proof of &ldquo;False&rdquo; that a long-running Lean server accepts.</dd>
             </dl>
             <p class="stack"><span class="stack-label">Stack</span> Python &middot; PyTorch &middot; Lean&nbsp;4 &middot; Mathlib &middot; Goedel-Prover-V2 &middot; HPC&nbsp;/&nbsp;Slurm</p>
             <p class="sublink"><a href="https://github.com/amitaminov-huji/Internal-State-Probes-for-Kernel-Verified-Theorem-Proving">Code &amp; thesis on GitHub &rarr;</a></p>
@@ -431,7 +431,8 @@
         every attempt with Lean&rsquo;s own kernel verdict rather than a proof
         server&rsquo;s reply: a proof either type-checks against the trusted
         axioms or it doesn&rsquo;t, so nothing is credited for merely looking
-        finished. Training and evaluation run on a university GPU cluster.
+        finished. The signal is there and it is early; the steering is not, and
+        I report that as a negative result.
       </p>
       <p>
         The same discipline runs through the rest of my work: chronological
@@ -456,7 +457,7 @@
         <dt class="sk-stats">Statistics &amp; Optimization</dt>
         <dd>Statistical modeling, experimental design, honest evaluation splits, uncertainty and simulation, mathematical optimization, resource-allocation / operations-research modeling</dd>
         <dt class="sk-formal">Formal Methods &amp; Lean</dt>
-        <dd>Lean&nbsp;4, Mathlib, kernel-verified evaluation protocols, internal-state probing, verifier-based reward design, theorem-proving evaluation</dd>
+        <dd>Lean&nbsp;4, Mathlib, kernel-verified evaluation protocols, internal-state probing, verifier-derived labelling, theorem-proving evaluation</dd>
         <dt class="sk-eng">Engineering &amp; Tooling</dt>
         <dd>Python, pytest, Git, Linux, HPC clusters (Slurm), FastAPI, reproducible pipelines, graceful degradation architecture</dd>
         <dt class="sk-data">Data &amp; Infrastructure</dt>
@@ -486,7 +487,7 @@
       </p>
       <p class="footer-closing">Let&rsquo;s build systems that reason.</p>
     </section>
-    <p class="colophon">Amit Aminov &middot; last updated July 2026</p>
+    <p class="colophon">Amit Aminov &middot; last updated October 2026</p>
   </div>
 </footer>
 
